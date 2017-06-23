@@ -1,0 +1,57 @@
+.test-login-wrapper .button, .test-login-wrapper .spinner, .sync-wrapper .button, .sync-wrapper .spinner {
+  float: left;
+  margin-bottom: 20px;
+}
+
+.WPPC_CCB_settings-wrapper div.ajax-message {
+  width: 50%;
+  padding: 10px;
+  clear:both;
+  font-size: 13px;
+}
+
+.WPPC_CCB_settings-wrapper code {
+  background: none;
+  padding: 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #666666;
+}
+
+.WPPC_CCB_settings ul {
+  list-style: inherit;
+  list-style-position: inside;
+}
+
+.WPPC_CCB_settings form {
+  background-color: white;
+  padding: 5px 30px;
+  margin-top: 12px;
+}
+
+.WPPC_CCB_settings-wrapper .slider-wrapper {
+  width: 250px;
+  float: left;
+  margin-top: 12px;
+  margin-right: 12px;
+}
+
+.WPPC_CCB_settings-wrapper .date-picker-wrapper {
+  display: inline;
+}
+.WPPC_CCB_settings-wrapper .date-picker-wrapper .picker .picker__table {
+  width: inherit;
+}
+.WPPC_CCB_settings-wrapper .date-picker-wrapper .picker .picker__frame {
+  max-width: 500px;
+}
+
+.WPPC_CCB_settings-wrapper fieldset {
+  display: inline;
+}
+
+.WPPC_CCB_settings-wrapper .wppc-ccb-tooltip {
+  font-size: 24px;
+  margin-left: 24px;
+}
+
