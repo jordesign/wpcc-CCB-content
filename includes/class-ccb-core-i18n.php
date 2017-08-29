@@ -5,11 +5,11 @@
  * Loads and defines the internationalization files for this plugin
  * so that its ready for translation.
  *
- * @link       http://jaredcobb.com/wppc-ccb
- * @since      1.0
+ * @link       http://jaredcobb.com/ccb-core
+ * @since      0.9.0
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/includes
+ * @package    CCB_Core
+ * @subpackage CCB_Core/includes
  */
 
 /**
@@ -18,17 +18,17 @@
  * Loads and defines the internationalization files for this plugin
  * so that its ready for translation.
  *
- * @since      1.0
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/includes
- * @author     WP Church Team <jordan@diakon.io>
+ * @since      0.9.0
+ * @package    CCB_Core
+ * @subpackage CCB_Core/includes
+ * @author     Jared Cobb <wordpress@jaredcobb.com>
  */
-class WPPC_CCB_i18n extends WPPC_CCB_Plugin {
+class CCB_Core_i18n extends CCB_Core_Plugin {
 
 	/**
 	 * Load the plugin text domain for translation.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 */
 	public function load_plugin_textdomain() {
 

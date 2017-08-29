@@ -5,11 +5,11 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the dashboard.
  *
- * @link       http://jaredcobb.com/wppc-ccb
- * @since      1.0
+ * @link       http://jaredcobb.com/ccb-core
+ * @since      0.9.0
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/includes
+ * @package    CCB_Core
+ * @subpackage CCB_Core/includes
  */
 
 /**
@@ -21,29 +21,29 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/includes
- * @author     WP Church Team <jordan@diakon.io>
+ * @since      0.9.0
+ * @package    CCB_Core
+ * @subpackage CCB_Core/includes
+ * @author     Jared Cobb <wordpress@jaredcobb.com>
  */
-class WPPC_CCB extends WPPC_CCB_Plugin {
+class CCB_Core extends CCB_Core_Plugin {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
-	 * @var      WPPC_CCB_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      CCB_Core_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
 	/**
 	 * A helper for getting the plugin_basename
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
-	 * @var      WPPC_CCB_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      CCB_Core_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $plugin_basename;
 
@@ -54,7 +54,7 @@ class WPPC_CCB extends WPPC_CCB_Plugin {
 	 * Load the dependencies, define the locale, and set the hooks for the Dashboard and
 	 * the public-facing side of the site.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 */
 	public function __construct( $plugin_basename ) {
 
@@ -72,7 +72,7 @@ class WPPC_CCB extends WPPC_CCB_Plugin {
 	 * Also create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -81,43 +81,43 @@ class WPPC_CCB extends WPPC_CCB_Plugin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/Encryption/Encryption.php';
 
 		// the class responsible for orchestrating the actions and filters of the core plugin.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppc-ccb-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ccb-core-loader.php';
 
 		// the class responsible for defining internationalization functionality of the plugin.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppc-ccb-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ccb-core-i18n.php';
 
 		// the class that defines options and settings for the plugin
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wppc-ccb-settings.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wppc-ccb-settings-page.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wppc-ccb-settings-section.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wppc-ccb-settings-field.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ccb-core-settings.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ccb-core-settings-page.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ccb-core-settings-section.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ccb-core-settings-field.php';
 
 		// the class responsible for defining all actions that occur in the Dashboard.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wppc-ccb-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ccb-core-admin.php';
 
 		// the class that handles data synchronization between CCB and the local cache
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wppc-ccb-sync.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ccb-core-sync.php';
 
 		// the class that handles data synchronization between CCB and the local cache
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wppc-ccb-cpts.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ccb-core-cpts.php';
 
 		// instantiate the loader
-		$this->loader = new WPPC_CCB_Loader();
+		$this->loader = new CCB_Core_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the WPPC_CCB_i18n class in order to set the domain and to register the hook
+	 * Uses the CCB_Core_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   private
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new WPPC_CCB_i18n();
+		$plugin_i18n = new CCB_Core_i18n();
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
 	}
@@ -126,12 +126,12 @@ class WPPC_CCB extends WPPC_CCB_Plugin {
 	 * Register all of the hooks related to the dashboard functionality
 	 * of the plugin.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new WPPC_CCB_Admin();
+		$plugin_admin = new CCB_Core_Admin();
 
 		$this->loader->add_action( 'init', $plugin_admin, 'initialize_custom_post_types' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'initialize_settings_menu' );
@@ -155,7 +155,7 @@ class WPPC_CCB extends WPPC_CCB_Plugin {
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 */
 	public function run() {
 		$this->loader->run();
@@ -164,8 +164,8 @@ class WPPC_CCB extends WPPC_CCB_Plugin {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     1.0
-	 * @return    WPPC_CCB_Loader    Orchestrates the hooks of the plugin.
+	 * @since     0.9.0
+	 * @return    CCB_Core_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

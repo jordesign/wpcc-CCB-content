@@ -2,27 +2,27 @@
 /**
  * Everything related to the plugin settings
  *
- * @link       http://jaredcobb.com/wppc-ccb
- * @since      1.0
+ * @link       http://jaredcobb.com/ccb-core
+ * @since      0.9.0
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
  */
 
 /**
  * Object to manage the plugin settings
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
- * @author     WP Church Team <jordan@diakon.io>
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
+ * @author     Jared Cobb <wordpress@jaredcobb.com>
  */
-class WPPC_CCB_Settings extends WPPC_CCB_Plugin {
+class CCB_Core_Settings extends CCB_Core_Plugin {
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function __construct() {
@@ -35,7 +35,7 @@ class WPPC_CCB_Settings extends WPPC_CCB_Plugin {
 	 * Validate the settings fields based on the settings config
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @param     array    $input
 	 * @return    array    $current_settings
 	 */
@@ -120,7 +120,7 @@ class WPPC_CCB_Settings extends WPPC_CCB_Plugin {
 	 * Helper function to create a name/value hash for quick validation
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    array    $mapping
 	 */
 	protected function generate_validation_hash() {
@@ -154,7 +154,7 @@ class WPPC_CCB_Settings extends WPPC_CCB_Plugin {
 	 * The whopper config used to create all the settings
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    array
 	 */
 	public function get_settings_definitions() {

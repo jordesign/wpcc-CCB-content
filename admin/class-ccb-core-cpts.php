@@ -2,26 +2,26 @@
 /**
  * Custom post types used in this plugin
  *
- * @link       http://jaredcobb.com/wppc-ccb
- * @since      1.0
+ * @link       http://jaredcobb.com/ccb-core
+ * @since      0.9.0
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
  */
 
 /**
  * Custom post types used in this plugin
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
- * @author     WP Church Team <jordan@diakon.io>
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
+ * @author     Jared Cobb <wordpress@jaredcobb.com>
  */
-class WPPC_CCB_CPTs extends WPPC_CCB_Plugin {
+class CCB_Core_CPTs extends CCB_Core_Plugin {
 
 	/**
 	 * The options we should use to register the groups CPT
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      array    $groups_cpt_options
 	 */
@@ -30,7 +30,7 @@ class WPPC_CCB_CPTs extends WPPC_CCB_Plugin {
 	/**
 	 * The options we should use to register the calendar CPT
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      array    $calendar_cpt_options
 	 */
@@ -39,7 +39,7 @@ class WPPC_CCB_CPTs extends WPPC_CCB_Plugin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 */
 	public function __construct() {
 
@@ -51,7 +51,7 @@ class WPPC_CCB_CPTs extends WPPC_CCB_Plugin {
 	 * Determine which CCB custom post types should be registered
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function initialize() {
@@ -65,7 +65,7 @@ class WPPC_CCB_CPTs extends WPPC_CCB_Plugin {
 			$this->groups_cpt_options['singular_name'] = rtrim( $this->groups_cpt_options['name'], 's' ); // this is ghetto
 			$this->groups_cpt_options['exclude_from_search'] = ( $settings['groups-exclude-from-search'] == 'yes' ? true : false );
 			$this->groups_cpt_options['publicly_queryable'] = ( $settings['groups-publicly-queryable'] == 'yes' ? true : false );
-			$this->groups_cpt_options['show_ui'] = ( $settings['groups-show-ui'] == 'yes' ? true : false );
+			$this->groups_cpt_options['show_ui'] = ( $settings['groups-show-ui'] == 'no' ? true : false );
 			$this->groups_cpt_options['show_in_nav_menus'] = ( $settings['groups-show-in-nav-menus'] == 'yes' ? true : false );
 
 			$this->register_groups();
@@ -79,8 +79,8 @@ class WPPC_CCB_CPTs extends WPPC_CCB_Plugin {
 			$this->calendar_cpt_options['singular_name'] = rtrim( $this->calendar_cpt_options['name'], 's' ); // this is ghetto
 			$this->calendar_cpt_options['exclude_from_search'] = ( $settings['calendar-exclude-from-search'] == 'yes' ? true : false );
 			$this->calendar_cpt_options['publicly_queryable'] = ( $settings['calendar-publicly-queryable'] == 'yes' ? true : false );
-			$this->calendar_cpt_options['show_ui'] = ( $settings['calendar-show-ui'] == 'yes' ? true : false );
-			$this->calendar_cpt_options['show_in_nav_menus'] = ( $settings['calendar-show-in-nav-menus'] == 'yes' ? true : false );
+			$this->calendar_cpt_options['show_ui'] = ( $settings['calendar-show-ui'] == 'no' ? true : false );
+			$this->calendar_cpt_options['show_in_nav_menus'] = ( $settings['calendar-show-in-nav-menus'] == 'no' ? true : false );
 
 			$this->register_calendar();
 
@@ -91,7 +91,7 @@ class WPPC_CCB_CPTs extends WPPC_CCB_Plugin {
 	 * Setup the CCB Groups custom post type and its taxonomies
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function register_groups() {
@@ -160,7 +160,7 @@ class WPPC_CCB_CPTs extends WPPC_CCB_Plugin {
 	 * Setup the CCB Events custom post type and its taxonomies
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function register_calendar() {

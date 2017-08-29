@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name:       WP Church Center: CCB Addon
  * Plugin URI:        http://www.wpchurch.center
- * Description:       An addon plugin for WP Church Center that provides integration with our CCB account
+ * Description:       An addon plugin for WP Church Center that provides integration with your CCB account
  * Version:           1.0
  * Author:            WP Church Team
  * Author URI:        http://wpchurch.team/
@@ -24,26 +24,38 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+/******* Add 'CCB Card' as an option  in the 'Card Type' field ******/
+function wpcc_load_ccb_cards( $field ) {
+             
+    $field['choices'][ 'ccb' ] = 'CCB Content Card';
+    return $field;   
+}
+add_filter('acf/load_field/name=wpcc_card_type', 'wpcc_load_ccb_cards');
+
+
+
+
+/****** We use the CCB API plugin for our API stuff (with some adjustments) ********/
 // parent class for entire plugin (name, version, other helpful properties and utility methods)
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-wppc-ccb-plugin.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-ccb-core-plugin.php';
 
 // code that runs during plugin activation
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-wppc-ccb-activator.php';
-register_activation_hook( __FILE__, array( 'WPPC_CCB_Activator', 'activate' ) );
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-ccb-core-activator.php';
+register_activation_hook( __FILE__, array( 'CCB_Core_Activator', 'activate' ) );
 
 // internationalization, dashboard-specific hooks, and public-facing site hooks.
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-wppc-ccb.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-ccb-core.php';
 
 /**
  * Begin execution of the plugin.
  *
- * @since    1.0
+ * @since    0.9.0
  */
-function run_WPPC_CCB() {
+function run_ccb_core() {
 
 	$plugin_basename = plugin_basename( __FILE__ );
-	$plugin = new WPPC_CCB( $plugin_basename );
+	$plugin = new CCB_Core( $plugin_basename );
 	$plugin->run();
 
 }
-run_WPPC_CCB();
+run_ccb_core();

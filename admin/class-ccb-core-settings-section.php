@@ -2,26 +2,26 @@
 /**
  * Everything related to the plugin settings sections
  *
- * @link       http://jaredcobb.com/wppc-ccb
- * @since      1.0
+ * @link       http://jaredcobb.com/ccb-core
+ * @since      0.9.0
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
  */
 
 /**
  * Object to manage the plugin settings sections
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
- * @author     WP Church Team <jordan@diakon.io>
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
+ * @author     Jared Cobb <wordpress@jaredcobb.com>
  */
-class WPPC_CCB_Settings_Section extends WPPC_CCB_Plugin {
+class CCB_Core_Settings_Section extends CCB_Core_Plugin {
 
 	/**
 	 * The key for the section in the settings array
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $section_id
 	 */
@@ -30,7 +30,7 @@ class WPPC_CCB_Settings_Section extends WPPC_CCB_Plugin {
 	/**
 	 * An array of field sections and their settings
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      array    $section
 	 */
@@ -40,7 +40,7 @@ class WPPC_CCB_Settings_Section extends WPPC_CCB_Plugin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function __construct( $section_id, $section ) {
@@ -59,7 +59,7 @@ class WPPC_CCB_Settings_Section extends WPPC_CCB_Plugin {
 	 * be removed when Google decides to let Chrome behave.
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function render_section_about() {
@@ -150,7 +150,7 @@ class WPPC_CCB_Settings_Section extends WPPC_CCB_Plugin {
 			<h3>Support</h3>
 			<p>
 				Support is limited, but if you have questions as a <strong>user</strong> of the plugin you can submit them on the official <a href="https://wordpress.org/support/plugin/church-community-builder-core-api" target="_blank">WordPress plugin support forum</a>.
-				If you're a Developer and would like to submit a bug report or pull request, you can do that on <a href="https://github.com/jaredcobb/wppc-ccb" target="_blank">GitHub</a>.
+				If you're a Developer and would like to submit a bug report or pull request, you can do that on <a href="https://github.com/jaredcobb/ccb-core" target="_blank">GitHub</a>.
 			</p>
 HTML;
 	}
@@ -159,7 +159,7 @@ HTML;
 	 * Render the other section titles
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function render_section() {

@@ -3,14 +3,14 @@
   margin-bottom: 20px;
 }
 
-.WPPC_CCB_settings-wrapper div.ajax-message {
+.ccb_core_settings-wrapper div.ajax-message {
   width: 50%;
   padding: 10px;
   clear:both;
   font-size: 13px;
 }
 
-.WPPC_CCB_settings-wrapper code {
+.ccb_core_settings-wrapper code {
   background: none;
   padding: 0;
   font-size: 12px;
@@ -18,39 +18,39 @@
   color: #666666;
 }
 
-.WPPC_CCB_settings ul {
+.ccb_core_settings ul {
   list-style: inherit;
   list-style-position: inside;
 }
 
-.WPPC_CCB_settings form {
+.ccb_core_settings form {
   background-color: white;
   padding: 5px 30px;
   margin-top: 12px;
 }
 
-.WPPC_CCB_settings-wrapper .slider-wrapper {
+.ccb_core_settings-wrapper .slider-wrapper {
   width: 250px;
   float: left;
   margin-top: 12px;
   margin-right: 12px;
 }
 
-.WPPC_CCB_settings-wrapper .date-picker-wrapper {
+.ccb_core_settings-wrapper .date-picker-wrapper {
   display: inline;
 }
-.WPPC_CCB_settings-wrapper .date-picker-wrapper .picker .picker__table {
+.ccb_core_settings-wrapper .date-picker-wrapper .picker .picker__table {
   width: inherit;
 }
-.WPPC_CCB_settings-wrapper .date-picker-wrapper .picker .picker__frame {
+.ccb_core_settings-wrapper .date-picker-wrapper .picker .picker__frame {
   max-width: 500px;
 }
 
-.WPPC_CCB_settings-wrapper fieldset {
+.ccb_core_settings-wrapper fieldset {
   display: inline;
 }
 
-.WPPC_CCB_settings-wrapper .wppc-ccb-tooltip {
+.ccb_core_settings-wrapper .ccb-core-tooltip {
   font-size: 24px;
   margin-left: 24px;
 }

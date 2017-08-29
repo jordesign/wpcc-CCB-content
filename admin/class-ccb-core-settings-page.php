@@ -2,26 +2,26 @@
 /**
  * Everything related to the plugin settings pages
  *
- * @link       http://jaredcobb.com/wppc-ccb
- * @since      1.0
+ * @link       http://jaredcobb.com/ccb-core
+ * @since      0.9.0
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
  */
 
 /**
  * Object to manage the plugin settings pages
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
- * @author     WP Church Team <jordan@diakon.io>
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
+ * @author     Jared Cobb <wordpress@jaredcobb.com>
  */
-class WPPC_CCB_Settings_Page extends WPPC_CCB_Plugin {
+class CCB_Core_Settings_Page extends CCB_Core_Plugin {
 
 	/**
 	 * The key for the page in the settings array
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $section_id
 	 */
@@ -31,7 +31,7 @@ class WPPC_CCB_Settings_Page extends WPPC_CCB_Plugin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function __construct( $page_id ) {
@@ -46,7 +46,7 @@ class WPPC_CCB_Settings_Page extends WPPC_CCB_Plugin {
 	 * Render the settings page template (used for all pages)
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function render_page() {
@@ -64,7 +64,7 @@ class WPPC_CCB_Settings_Page extends WPPC_CCB_Plugin {
 				<?php do_settings_sections( $this->page_id ); ?>
 
 				<?php
-				if ( $this->page_id != 'WPPC_CCB_settings' ) {
+				if ( $this->page_id != 'ccb_core_settings' ) {
 					?>
 					<p class="submit">
 						<input name="submit" class="button-primary" type="submit" value="<?php esc_attr_e('Save Changes'); ?>" />

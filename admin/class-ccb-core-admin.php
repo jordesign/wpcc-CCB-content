@@ -2,26 +2,26 @@
 /**
  * The dashboard-specific functionality of the plugin.
  *
- * @link       http://jaredcobb.com/wppc-ccb
- * @since      1.0
+ * @link       http://jaredcobb.com/ccb-core
+ * @since      0.9.0
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
  */
 
 /**
  * The dashboard-specific functionality of the plugin.
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
- * @author     WP Church Team <jordan@diakon.io>
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
+ * @author     Jared Cobb <wordpress@jaredcobb.com>
  */
-class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
+class CCB_Core_Admin extends CCB_Core_Plugin {
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 */
 	public function __construct() {
 		parent::__construct();
@@ -31,20 +31,20 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 	 * Initialize the Settings Menu and Page
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function initialize_settings_menu() {
 
-		$settings = new WPPC_CCB_Settings();
+		$settings = new CCB_Core_Settings();
 		$settings_definitions = $settings->get_settings_definitions();
-		$settings_page = new WPPC_CCB_Settings_Page( $this->plugin_settings_name );
+		$settings_page = new CCB_Core_Settings_Page( $this->plugin_settings_name );
 
 		add_menu_page( $this->plugin_display_name, $this->plugin_short_display_name, 'manage_options', $this->plugin_settings_name, '__return_null', 'dashicons-update', '80.9' );
 
 		if ( is_array( $settings_definitions ) && ! empty( $settings_definitions ) ) {
 			foreach ( $settings_definitions as $page_id => $page ) {
-				$settings_page = new WPPC_CCB_Settings_Page( $page_id, $page );
+				$settings_page = new CCB_Core_Settings_Page( $page_id, $page );
 				add_submenu_page( $this->plugin_settings_name, $page['page_title'], $page['page_title'], 'manage_options', $page_id, array( $settings_page, 'render_page' ) );
 			}
 		}
@@ -54,12 +54,12 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 	 * Initialize the Settings
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function initialize_settings() {
 
-		$settings = new WPPC_CCB_Settings();
+		$settings = new CCB_Core_Settings();
 		$settings_definitions = $settings->get_settings_definitions();
 
 		if ( is_array( $settings_definitions ) && ! empty( $settings_definitions ) ) {
@@ -70,13 +70,13 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 				if ( isset( $page['sections'] ) && ! empty( $page['sections'] ) ) {
 					foreach ( $page['sections'] as $section_id => $section ) {
 
-						$settings_section = new WPPC_CCB_Settings_Section( $section_id, $section );
+						$settings_section = new CCB_Core_Settings_Section( $section_id, $section );
 						add_settings_section( $section_id, $section['section_title'], array( $settings_section, 'render_section' ), $page_id );
 
 						if ( isset( $section['fields'] ) && ! empty( $section['fields'] ) ) {
 							foreach ( $section['fields'] as $field_id => $field ) {
 
-								$settings_field = new WPPC_CCB_Settings_Field( $field_id, $field );
+								$settings_field = new CCB_Core_Settings_Field( $field_id, $field );
 								add_settings_field( $field_id, $field['field_title'], array( $settings_field, 'render_field' ), $page_id, $section_id );
 
 							}
@@ -139,11 +139,11 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 	 * Register the CCB custom post types if enabled
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function initialize_custom_post_types() {
-		$cpts = new WPPC_CCB_CPTs();
+		$cpts = new CCB_Core_CPTs();
 		$cpts->initialize();
 	}
 
@@ -152,7 +152,7 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 	 * with a non-blocking ajax response
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function ajax_sync() {
@@ -166,7 +166,7 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 		// tell the user to move along and go about their business...
 		$this->send_non_blocking_json_response( array( 'success' => true ) );
 
-		$sync = new WPPC_CCB_Sync();
+		$sync = new CCB_Core_Sync();
 		$sync->sync();
 
 	}
@@ -176,7 +176,7 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 	 * and responds with the transient value
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function ajax_poll_sync() {
@@ -195,7 +195,7 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 	 * Gets the latest synchronization results from an ajax hook
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function ajax_get_latest_sync() {
@@ -214,7 +214,7 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 	 * Checks the credentials for a user from an ajax hook
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function ajax_test_credentials() {
@@ -224,7 +224,7 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 			wp_send_json( array('success' => false) );
 		}
 
-		$sync = new WPPC_CCB_Sync();
+		$sync = new CCB_Core_Sync();
 		$validation_results = $sync->test_api_credentials();
 
 		wp_send_json( $validation_results );
@@ -236,7 +236,7 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 	 *
 	 * @param array $links
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    array
 	 */
 	public function add_settings_link( $links ) {
@@ -249,7 +249,7 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 	 * the options set by the user
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function check_auto_refresh() {
@@ -279,23 +279,23 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 	 * Callback function to kick off a synchronization
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function auto_sync() {
-		$sync = new WPPC_CCB_Sync();
+		$sync = new CCB_Core_Sync();
 		$sync->sync();
 	}
 
 	/**
 	 * Register the stylesheets for the dashboard.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 */
 	public function enqueue_styles( $hook ) {
 
 		if ( stristr( $hook, $this->plugin_settings_name ) !== false ) {
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wppc-ccb-admin.css', array(), $this->version, 'all' );
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ccb-core-admin.css', array(), $this->version, 'all' );
 			wp_enqueue_style( 'switchery', plugin_dir_url( __FILE__ ) . 'css/vendor/switchery.min.css', array(), $this->version, 'all' );
 			wp_enqueue_style( 'powerange', plugin_dir_url( __FILE__ ) . 'css/vendor/powerange.min.css', array(), $this->version, 'all' );
 			wp_enqueue_style( 'picker', plugin_dir_url( __FILE__ ) . 'css/vendor/default.css', array(), $this->version, 'all' );
@@ -308,12 +308,12 @@ class WPPC_CCB_Admin extends WPPC_CCB_Plugin {
 	/**
 	 * Register the scripts for the dashboard.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 */
 	public function enqueue_scripts( $hook ) {
 
 		if ( stristr( $hook, $this->plugin_settings_name ) !== false ) {
-			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wppc-ccb-admin.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ccb-core-admin.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script( 'switchery', plugin_dir_url( __FILE__ ) . 'js/vendor/switchery.min.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script( 'powerange', plugin_dir_url( __FILE__ ) . 'js/vendor/powerange.min.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script( 'picker', plugin_dir_url( __FILE__ ) . 'js/vendor/picker.js', array( 'jquery' ), $this->version, false );

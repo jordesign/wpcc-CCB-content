@@ -2,28 +2,28 @@
 /**
  * Parent class for all plugin files
  *
- * @link       http://jaredcobb.com/wppc-ccb
- * @since      1.0
+ * @link       http://jaredcobb.com/ccb-core
+ * @since      0.9.0
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/includes
+ * @package    CCB_Core
+ * @subpackage CCB_Core/includes
  */
 
 /**
  * Parent class used to store helpful properties
  * and define some helpful utility methods
  *
- * @since      1.0
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/includes
- * @author     WP Church Team <jordan@diakon.io>
+ * @since      0.9.0
+ * @package    CCB_Core
+ * @subpackage CCB_Core/includes
+ * @author     Jared Cobb <wordpress@jaredcobb.com>
  */
-class WPPC_CCB_Plugin {
+class CCB_Core_Plugin {
 
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
 	 */
@@ -32,7 +32,7 @@ class WPPC_CCB_Plugin {
 	/**
 	 * The settings variable name used to access the plugin settings
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $plugin_settings_name
 	 */
@@ -41,7 +41,7 @@ class WPPC_CCB_Plugin {
 	/**
 	 * The display name of this plugin.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $plugin_display_name    The display name of this plugin.
 	 */
@@ -50,7 +50,7 @@ class WPPC_CCB_Plugin {
 	/**
 	 * The short display name of this plugin.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $plugin_short_display_name    The short display name of this plugin.
 	 */
@@ -59,7 +59,7 @@ class WPPC_CCB_Plugin {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $version    The current version of the plugin.
 	 */
@@ -70,12 +70,12 @@ class WPPC_CCB_Plugin {
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 */
 	public function __construct() {
 
-		$this->plugin_name = 'wppc-ccb';
-		$this->plugin_settings_name = 'WPPC_CCB_settings';
+		$this->plugin_name = 'ccb-core';
+		$this->plugin_settings_name = 'ccb_core_settings';
 		$this->plugin_display_name = __( 'Church Community Builder Core API', $this->plugin_name );
 		$this->plugin_short_display_name = __( 'CCB Core API', $this->plugin_name );
 		$this->version = '0.9.6';
@@ -86,7 +86,7 @@ class WPPC_CCB_Plugin {
 	/**
 	 * Encrypts and base64_encodes a string safe for serialization in WordPress
 	 *
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @access    protected
 	 * @param     string    $data
 	 * @return    string
@@ -98,7 +98,7 @@ class WPPC_CCB_Plugin {
 
 		if ( ! empty( $data ) ) {
 			try {
-				$e = new WPPC_CCB_Vendor_Encryption( MCRYPT_BlOWFISH, MCRYPT_MODE_CBC );
+				$e = new CCB_Core_Vendor_Encryption( MCRYPT_BlOWFISH, MCRYPT_MODE_CBC );
 				$encrypted_value = base64_encode( $e->encrypt( $data, $key ) );
 			}
 			catch ( Exception $ex ) {
@@ -113,7 +113,7 @@ class WPPC_CCB_Plugin {
 	/**
 	 * Decrypts and base64_decodes a string
 	 *
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @access    protected
 	 * @param     string    $data
 	 * @return    string
@@ -125,7 +125,7 @@ class WPPC_CCB_Plugin {
 
 		if ( ! empty( $data ) ) {
 			try {
-				$e = new WPPC_CCB_Vendor_Encryption( MCRYPT_BlOWFISH, MCRYPT_MODE_CBC );
+				$e = new CCB_Core_Vendor_Encryption( MCRYPT_BlOWFISH, MCRYPT_MODE_CBC );
 				$decrypted_value = $e->decrypt( base64_decode( $data ), $key );
 			}
 			catch ( Exception $ex ) {
@@ -143,7 +143,7 @@ class WPPC_CCB_Plugin {
 	 *
 	 * @param     array    $response
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    bool
 	 */
 	protected function send_non_blocking_json_response( $response ) {
@@ -172,7 +172,7 @@ class WPPC_CCB_Plugin {
 	 * @param     string    $date
 	 * @param     string    $format
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    bool
 	 */
 	protected function valid_date( $date, $format = 'Y-m-d H:i:s' ) {
@@ -190,7 +190,7 @@ class WPPC_CCB_Plugin {
 	 * of an array with a style class and message
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    array
 	 */
 	protected function get_latest_sync_results() {

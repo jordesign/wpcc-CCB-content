@@ -41,7 +41,7 @@
         hiddenName: true
       });
 
-      $('.wppc-ccb-tooltip').tipr({
+      $('.ccb-core-tooltip').tipr({
         "mode":"top"
       });
 
@@ -58,7 +58,7 @@
           for (var key in requiresObject) {
             if (requiresObject.hasOwnProperty(key)) {
 
-              var requiredElement = $("[name='WPPC_CCB_settings[" + key + "]']");
+              var requiredElement = $("[name='ccb_core_settings[" + key + "]']");
               if (requiredElement.is(':checkbox')) {
                 if (!requiredElement.is(':checked')) {
                   displayField = false;
@@ -66,7 +66,7 @@
                 }
               }
               else if (requiredElement.is(':radio')) {
-                requiredElement = $("[name='WPPC_CCB_settings[" + key + "]']:checked");
+                requiredElement = $("[name='ccb_core_settings[" + key + "]']:checked");
                 if (requiredElement.val() !== requiresObject[key])
                   displayField = false;
                   break;
@@ -90,12 +90,12 @@
 
       var data = {
         'action': 'get_latest_sync',
-        'nextNonce': WPPC_CCB_SETTINGS.nextNonce
+        'nextNonce': CCB_CORE_SETTINGS.nextNonce
       };
 
       $.post(ajaxurl, data, function(response) {
 
-        var $latestSyncMessageWrapper = $('.wppc-ccb-latest-results');
+        var $latestSyncMessageWrapper = $('.ccb-core-latest-results');
         var labelContent = '<b>Latest Sync Results</b><br>' + response.description;
 
         $latestSyncMessageWrapper.removeClass('error notice updated').addClass(response.style);
@@ -109,7 +109,7 @@
 
       var data = {
         'action': 'poll_sync',
-        'nextNonce': WPPC_CCB_SETTINGS.nextNonce
+        'nextNonce': CCB_CORE_SETTINGS.nextNonce
       };
 
       $.post(ajaxurl, data, function(response) {
@@ -146,7 +146,7 @@
 
       var data = {
         'action': 'test_credentials',
-        'nextNonce': WPPC_CCB_SETTINGS.nextNonce
+        'nextNonce': CCB_CORE_SETTINGS.nextNonce
       };
 
       $.post(ajaxurl, data, function(response) {
@@ -188,7 +188,7 @@
 
       var data = {
         'action': 'sync',
-        'nextNonce': WPPC_CCB_SETTINGS.nextNonce
+        'nextNonce': CCB_CORE_SETTINGS.nextNonce
       };
 
       $.post(ajaxurl, data, function(response) {

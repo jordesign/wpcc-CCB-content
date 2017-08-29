@@ -2,11 +2,11 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       http://jaredcobb.com/wppc-ccb
- * @since      1.0
+ * @link       http://jaredcobb.com/ccb-core
+ * @since      0.9.0
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/includes
+ * @package    CCB_Core
+ * @subpackage CCB_Core/includes
  */
 
 /**
@@ -16,16 +16,16 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/includes
- * @author     WP Church Team <jordan@diakon.io>
+ * @package    CCB_Core
+ * @subpackage CCB_Core/includes
+ * @author     Jared Cobb <wordpress@jaredcobb.com>
  */
-class WPPC_CCB_Loader extends WPPC_CCB_Plugin {
+class CCB_Core_Loader extends CCB_Core_Plugin {
 
 	/**
 	 * The array of actions registered with WordPress.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      array    $actions    The actions registered with WordPress to fire when the plugin loads.
 	 */
@@ -34,7 +34,7 @@ class WPPC_CCB_Loader extends WPPC_CCB_Plugin {
 	/**
 	 * The array of filters registered with WordPress.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      array    $filters    The filters registered with WordPress to fire when the plugin loads.
 	 */
@@ -43,7 +43,7 @@ class WPPC_CCB_Loader extends WPPC_CCB_Plugin {
 	/**
 	 * Initialize the collections used to maintain the actions and filters.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 */
 	public function __construct() {
 
@@ -55,7 +55,7 @@ class WPPC_CCB_Loader extends WPPC_CCB_Plugin {
 	/**
 	 * Add a new action to the collection to be registered with WordPress.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @var      string               $hook             The name of the WordPress action that is being registered.
 	 * @var      object               $component        A reference to the instance of the object on which the action is defined.
 	 * @var      string               $callback         The name of the function definition on the $component.
@@ -69,7 +69,7 @@ class WPPC_CCB_Loader extends WPPC_CCB_Plugin {
 	/**
 	 * Add a new filter to the collection to be registered with WordPress.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @var      string               $hook             The name of the WordPress filter that is being registered.
 	 * @var      object               $component        A reference to the instance of the object on which the filter is defined.
 	 * @var      string               $callback         The name of the function definition on the $component.
@@ -84,7 +84,7 @@ class WPPC_CCB_Loader extends WPPC_CCB_Plugin {
 	 * A utility function that is used to register the actions and hooks into a single
 	 * collection.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   private
 	 * @var      array                $hooks            The collection of hooks that is being registered (that is, actions or filters).
 	 * @var      string               $hook             The name of the WordPress filter that is being registered.
@@ -111,7 +111,7 @@ class WPPC_CCB_Loader extends WPPC_CCB_Plugin {
 	/**
 	 * Register the filters and actions with WordPress.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 */
 	public function run() {
 

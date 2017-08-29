@@ -2,11 +2,11 @@
 /**
  * Synchronize CCB API data
  *
- * @link       http://jaredcobb.com/wppc-ccb
- * @since      1.0
+ * @link       http://jaredcobb.com/ccb-core
+ * @since      0.9.0
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
  */
 
 /**
@@ -14,16 +14,16 @@
  *
  * Handles the cURL request, throttling, and caching of data
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
- * @author     WP Church Team <jordan@diakon.io>
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
+ * @author     Jared Cobb <wordpress@jaredcobb.com>
  */
-class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
+class CCB_Core_Sync extends CCB_Core_Plugin {
 
 	/**
 	 * The subdomain of the ccb church installation
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $subdomain
 	 */
@@ -32,7 +32,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	/**
 	 * The ccb api username
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $username
 	 */
@@ -41,7 +41,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	/**
 	 * The ccb api password
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $password
 	 */
@@ -50,7 +50,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	/**
 	 * The CCB APIs we want to sync with
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      array    $enabled_apis
 	 */
@@ -59,7 +59,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	/**
 	 * The start date range for calendar events
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $calendar_start_date
 	 */
@@ -68,7 +68,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	/**
 	 * The end date range for calendar events
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $calendar_end_date
 	 */
@@ -77,7 +77,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	/**
 	 * Any valid service that the core API might integrate with
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      array    $valid_services
 	 */
@@ -95,7 +95,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 */
 	public function __construct() {
 
@@ -220,7 +220,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	 *	 ),
 	 * )
 	 *
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @param     array    $services    An array of services and parameters to call
 	 * @access    protected
 	 * @return    void
@@ -232,7 +232,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 
 		// for debugging purposes, set a constant and serialize an array like so:
 		// define( 'RESPONSE_FILE', serialize( array( 'filename' => 'some_file.xml', 'service_name' => 'group_profiles' ) ) );
-		// file must be located in the /uploads/wppc-ccb/ folder
+		// file must be located in the /uploads/ccb-core/ folder
 		// this will prevent a real api call and will use an xml file
 		if ( WP_DEBUG == true && defined( 'RESPONSE_FILE' ) ) {
 
@@ -343,7 +343,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	 * Perform a synchronization
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function sync() {
@@ -448,7 +448,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	 * as defined in the constructor
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    string
 	 */
 	public function test_api_credentials() {
@@ -465,7 +465,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	 *
 	 * @param     mixed    $full_response
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    array
 	 */
 	protected function validate_response( $full_response ) {
@@ -529,7 +529,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	 * Parses the XML response, deletes existing CPTs, and imports CCB data
 	 *
 	 * @param     mixed    $full_response
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @access    protected
 	 * @return    void
 	 */
@@ -546,10 +546,10 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 		// GROUP PROFILES
 		if ( $this->enabled_apis['group_profiles'] == true && isset( $full_response['group_profiles']->response->groups->group ) && ! empty( $full_response['group_profiles']->response->groups->group ) ) {
 
-			$groups_taxonomy_map = WPPC_CCB_CPTs::get_groups_taxonomy_map();
+			$groups_taxonomy_map = CCB_Core_CPTs::get_groups_taxonomy_map();
 			$groups_taxonomy_map = apply_filters( 'ccb_get_groups_taxonomy_map', $groups_taxonomy_map );
 
-			$groups_custom_fields_map = WPPC_CCB_CPTs::get_groups_custom_fields_map();
+			$groups_custom_fields_map = CCB_Core_CPTs::get_groups_custom_fields_map();
 			$groups_custom_fields_map = apply_filters( 'ccb_get_groups_custom_fields_map', $groups_custom_fields_map );
 
 			// delete the existing taxonomy terms
@@ -662,10 +662,10 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 		// PUBLIC CALENDAR LISTING
 		if ( $this->enabled_apis['public_calendar_listing'] == true && isset( $full_response['public_calendar_listing']->response->items->item ) && ! empty( $full_response['public_calendar_listing']->response->items->item ) ) {
 
-			$calendar_taxonomy_map = WPPC_CCB_CPTs::get_calendar_taxonomy_map();
+			$calendar_taxonomy_map = CCB_Core_CPTs::get_calendar_taxonomy_map();
 			$calendar_taxonomy_map = apply_filters( 'ccb_get_calendar_taxonomy_map', $calendar_taxonomy_map );
 
-			$calendar_custom_fields_map = WPPC_CCB_CPTs::get_calendar_custom_fields_map();
+			$calendar_custom_fields_map = CCB_Core_CPTs::get_calendar_custom_fields_map();
 			$calendar_custom_fields_map = apply_filters( 'ccb_get_calendar_custom_fields_map', $calendar_custom_fields_map );
 
 			// delete the existing taxonomy terms
@@ -737,7 +737,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	 * @param     mixed    $post_data
 	 * @param     array    $taxonomy_map
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function get_taxonomy_atts( $post_data, $taxonomy_map ) {
@@ -801,7 +801,7 @@ class WPPC_CCB_Sync extends WPPC_CCB_Plugin {
 	 * @param     array     $custom_fields_map
 	 * @param     string    $parent_field_name
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function get_custom_fields_atts( $post_data, $custom_fields_map, $parent_field_name = '' ) {

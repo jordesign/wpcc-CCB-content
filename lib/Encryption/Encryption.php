@@ -14,7 +14,7 @@
  * - Does HMAC verification of source data
  *
  */
-class WPPC_CCB_Vendor_Encryption {
+class CCB_Core_Vendor_Encryption {
 
     /**
      * @var string $cipher The mcrypt cipher to use for this instance

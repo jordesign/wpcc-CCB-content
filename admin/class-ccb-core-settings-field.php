@@ -2,26 +2,26 @@
 /**
  * Everything related to the plugin settings fields
  *
- * @link       http://jaredcobb.com/wppc-ccb
- * @since      1.0
+ * @link       http://jaredcobb.com/ccb-core
+ * @since      0.9.0
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
  */
 
 /**
  * Object to manage the plugin settings fields
  *
- * @package    WPPC_CCB
- * @subpackage WPPC_CCB/admin
- * @author     WP Church Team <jordan@diakon.io>
+ * @package    CCB_Core
+ * @subpackage CCB_Core/admin
+ * @author     Jared Cobb <wordpress@jaredcobb.com>
  */
-class WPPC_CCB_Settings_Field extends WPPC_CCB_Plugin {
+class CCB_Core_Settings_Field extends CCB_Core_Plugin {
 
 	/**
 	 * The key for the field in the settings array
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      string    $field_id
 	 */
@@ -30,7 +30,7 @@ class WPPC_CCB_Settings_Field extends WPPC_CCB_Plugin {
 	/**
 	 * An array of field settings
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      array    $field
 	 */
@@ -39,7 +39,7 @@ class WPPC_CCB_Settings_Field extends WPPC_CCB_Plugin {
 	/**
 	 * The existing settings currently stored
 	 *
-	 * @since    1.0
+	 * @since    0.9.0
 	 * @access   protected
 	 * @var      array    $existing_settings
 	 */
@@ -49,7 +49,7 @@ class WPPC_CCB_Settings_Field extends WPPC_CCB_Plugin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function __construct( $field_id, $field ) {
@@ -66,14 +66,14 @@ class WPPC_CCB_Settings_Field extends WPPC_CCB_Plugin {
 	 * General method that calls correct field render method based on config
 	 *
 	 * @access    public
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	public function render_field() {
 		if ( isset( $this->field['field_render_function'] ) && is_callable( array( $this, $this->field['field_render_function'] ) ) ) {
 			call_user_func( array( $this, $this->field['field_render_function'] ) );
 			if ( isset( $this->field['field_tooltip'] ) ) {
-				echo '<span class="wppc-ccb-tooltip dashicons dashicons-editor-help" data-tip="' . esc_html( $this->field['field_tooltip'] ) . '"></span>';
+				echo '<span class="ccb-core-tooltip dashicons dashicons-editor-help" data-tip="' . esc_html( $this->field['field_tooltip'] ) . '"></span>';
 			}
 		}
 	}
@@ -82,7 +82,7 @@ class WPPC_CCB_Settings_Field extends WPPC_CCB_Plugin {
 	 * Render a textfield
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function render_text() {
@@ -100,7 +100,7 @@ class WPPC_CCB_Settings_Field extends WPPC_CCB_Plugin {
 	 * Render a switch button (checkbox)
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function render_switch() {
@@ -118,7 +118,7 @@ class WPPC_CCB_Settings_Field extends WPPC_CCB_Plugin {
 	 * Render a slider widget (textfield)
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function render_slider() {
@@ -137,7 +137,7 @@ class WPPC_CCB_Settings_Field extends WPPC_CCB_Plugin {
 	 * Render a jQuery date picker
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function render_date_picker() {
@@ -155,7 +155,7 @@ class WPPC_CCB_Settings_Field extends WPPC_CCB_Plugin {
 	 * Render radio buttons
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function render_radio() {
@@ -179,7 +179,7 @@ class WPPC_CCB_Settings_Field extends WPPC_CCB_Plugin {
 	 * Render a username and password field
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function render_credentials() {
@@ -202,7 +202,7 @@ HTML;
 	 * Render a test credentials button
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function render_test_credentials() {
@@ -226,7 +226,7 @@ HTML;
 	 * Render a manual sync button
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function render_manual_sync() {
@@ -253,12 +253,12 @@ HTML;
 	 * Render an area to display the latest sync results
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    void
 	 */
 	protected function render_latest_results() {
 		echo <<<HTML
-			<div class="ajax-message wppc-ccb-latest-results">
+			<div class="ajax-message ccb-core-latest-results">
 				<div class="spinner is-active" style="float:left;margin-top:-8px;"></div>
 			</div>
 HTML;
@@ -268,7 +268,7 @@ HTML;
 	 * Helper method to build HTML attributes from the config
 	 *
 	 * @access    protected
-	 * @since     1.0
+	 * @since     0.9.0
 	 * @return    string
 	 */
 	protected function build_attributes_string() {
