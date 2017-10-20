@@ -107,7 +107,7 @@ class CCB_Core_Sync extends CCB_Core_Plugin {
 		$this->username = $settings['credentials']['username'];
 		$this->password = $this->decrypt( $settings['credentials']['password'] );
 
-		if ( isset( $settings['groups-enabled'] ) && $settings['groups-enabled'] == 1 ) {
+		
 
 			$this->enabled_apis['group_profiles'] = true;
 
@@ -118,8 +118,8 @@ class CCB_Core_Sync extends CCB_Core_Plugin {
 				$this->import_group_images = false;
 			}
 
-		}
-		if ( isset( $settings['calendar-enabled'] ) && $settings['calendar-enabled'] == 1 ) {
+		
+		
 
 			$this->enabled_apis['public_calendar_listing'] = true;
 
@@ -175,7 +175,7 @@ class CCB_Core_Sync extends CCB_Core_Plugin {
 				}
 			}
 
-		}
+		
 
 		$this->valid_services = array(
 			array(
@@ -612,6 +612,12 @@ class CCB_Core_Sync extends CCB_Core_Plugin {
 						}
 					}
 
+					//Add Custom Field for Group ID
+					add_post_meta( $post_id, 'group_id', $group_id );
+
+					//Add Custom Field for Group ID
+					add_post_meta( $post_id, 'group_image_url', print_r( $group ) );
+
 					// insert custom fields
 					$custom_fields_atts = $this->get_custom_fields_atts( $group, $groups_custom_fields_map );
 					if ( ! empty( $custom_fields_atts ) ) {
@@ -689,6 +695,14 @@ class CCB_Core_Sync extends CCB_Core_Plugin {
 
 			foreach ( $full_response['public_calendar_listing']->response->items->item as $event ) {
 
+				$event_id = 0;
+					foreach( $event->event_name->attributes() as $key => $value ) {
+						if ( $key == 'ccb_id' ) {
+							$event_id = (int) $value;
+							break;
+						}
+					}
+
 				// insert event post
 				$event_post_atts = array(
 					'post_title' => $event->event_name,
@@ -706,6 +720,13 @@ class CCB_Core_Sync extends CCB_Core_Plugin {
 						wp_set_post_terms( $post_id, $taxonomy_attribute['terms'], $taxonomy_attribute['taxonomy'], true );
 					}
 				}
+
+
+					//Add Custom Field for Group ID
+					add_post_meta( $post_id, 'event_id', $event_id );
+
+					//Add Custom Field for Group ID
+					add_post_meta( $post_id, 'event_image_url', print_r( $event ) );
 
 				// insert custom fields
 				$custom_fields_atts = $this->get_custom_fields_atts( $event, $calendar_custom_fields_map );

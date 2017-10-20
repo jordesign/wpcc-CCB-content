@@ -6,7 +6,7 @@
 
     syncPollId : '',
 
-    initialize : function() {
+    initialize : function() { 
 
       this.syncPollId = setInterval(this.pollForActiveSync, 10000);
       this.pollForActiveSync();
@@ -58,7 +58,7 @@
           for (var key in requiresObject) {
             if (requiresObject.hasOwnProperty(key)) {
 
-              var requiredElement = $("[name='ccb_core_settings[" + key + "]']");
+              var requiredElement = $("[name='CCB_CONTENT_SETTINGS[" + key + "]']");
               if (requiredElement.is(':checkbox')) {
                 if (!requiredElement.is(':checked')) {
                   displayField = false;
@@ -66,7 +66,7 @@
                 }
               }
               else if (requiredElement.is(':radio')) {
-                requiredElement = $("[name='ccb_core_settings[" + key + "]']:checked");
+                requiredElement = $("[name='CCB_CONTENT_SETTINGS[" + key + "]']:checked");
                 if (requiredElement.val() !== requiresObject[key])
                   displayField = false;
                   break;
@@ -90,7 +90,7 @@
 
       var data = {
         'action': 'get_latest_sync',
-        'nextNonce': CCB_CORE_SETTINGS.nextNonce
+        'nextNonce': CCB_CONTENT_SETTINGS.nextNonce
       };
 
       $.post(ajaxurl, data, function(response) {
@@ -109,7 +109,7 @@
 
       var data = {
         'action': 'poll_sync',
-        'nextNonce': CCB_CORE_SETTINGS.nextNonce
+        'nextNonce': CCB_CONTENT_SETTINGS.nextNonce
       };
 
       $.post(ajaxurl, data, function(response) {
@@ -138,7 +138,7 @@
       }
 
       var $spinner = $('.test-login-wrapper .spinner');
-      var $testLoginWrapper = $('.test-login-wrapper');
+      var $testLoginWrapper = $('.test-login-wrapper'); 
 
       $clickedButton.addClass('disabled');
       $spinner.addClass('is-active');
@@ -146,7 +146,7 @@
 
       var data = {
         'action': 'test_credentials',
-        'nextNonce': CCB_CORE_SETTINGS.nextNonce
+        'nextNonce': CCB_CONTENT_SETTINGS.nextNonce
       };
 
       $.post(ajaxurl, data, function(response) {
@@ -188,7 +188,7 @@
 
       var data = {
         'action': 'sync',
-        'nextNonce': CCB_CORE_SETTINGS.nextNonce
+        'nextNonce': CCB_CONTENT_SETTINGS.nextNonce
       };
 
       $.post(ajaxurl, data, function(response) {
@@ -200,11 +200,31 @@
 
   };
 
+  
+
   $(function() {
 
     ccbCoreAdmin.initialize();
 
   });
 
+
+
 })( jQuery );
+
+
+jQuery(document).ready(function($) {
+
+//Popup Modular window for previewing groups and events
+  $('.editButton a.previewButton').click(function(e){
+    e.preventDefault();
+    $(this).siblings('.ccbOverlay').fadeIn('fast').css('display','flex');
+  });
+
+  $('.closeButton').click(function(e){
+    e.preventDefault();
+    $('.ccbOverlay').fadeOut('fast');
+  });
+
+});
 

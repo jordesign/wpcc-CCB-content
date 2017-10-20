@@ -3,14 +3,14 @@
   margin-bottom: 20px;
 }
 
-.ccb_core_settings-wrapper div.ajax-message {
+.ccb-content-wrapper div.ajax-message {
   width: 50%;
   padding: 10px;
   clear:both;
   font-size: 13px;
 }
 
-.ccb_core_settings-wrapper code {
+.ccb-content-wrapper code {
   background: none;
   padding: 0;
   font-size: 12px;
@@ -18,40 +18,107 @@
   color: #666666;
 }
 
-.ccb_core_settings ul {
+.ccb-content ul {
   list-style: inherit;
   list-style-position: inside;
 }
 
-.ccb_core_settings form {
+.ccb-content form {
   background-color: white;
   padding: 5px 30px;
   margin-top: 12px;
 }
 
-.ccb_core_settings-wrapper .slider-wrapper {
+.ccb-content-wrapper .slider-wrapper {
   width: 250px;
   float: left;
   margin-top: 12px;
   margin-right: 12px;
 }
 
-.ccb_core_settings-wrapper .date-picker-wrapper {
+.ccb-content-wrapper .date-picker-wrapper {
   display: inline;
 }
-.ccb_core_settings-wrapper .date-picker-wrapper .picker .picker__table {
+.ccb-content-wrapper .date-picker-wrapper .picker .picker__table {
   width: inherit;
 }
-.ccb_core_settings-wrapper .date-picker-wrapper .picker .picker__frame {
+.ccb-content-wrapper .date-picker-wrapper .picker .picker__frame {
   max-width: 500px;
 }
 
-.ccb_core_settings-wrapper fieldset {
+.ccb-content-wrapper fieldset {
   display: inline;
 }
 
-.ccb_core_settings-wrapper .ccb-core-tooltip {
+.ccb-content-wrapper .ccb-core-tooltip {
   font-size: 24px;
   margin-left: 24px;
 }
+
+/* CCB Overlay/Preview */
+
+.ccbOverlay {
+  position:fixed;
+  left:0;
+  top:0;
+  right:0;
+  bottom:0;
+  background:#111;
+  background: rgba(0,0,0,0.8);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  z-index:9999;
+  display:none;
+}
+
+.ccbOverlay .ccbOverlayContent {
+  width: 400px;
+  max-width: 80%;
+  background:#fff;
+  border-radius: 5px;
+  padding: 15px;
+  position:relative;
+}
+
+.ccbOverlay .ccbOverlayContent .closeButton {
+  position:absolute;
+  top:10px;
+  right:10px;
+  padding-right: 30px;
+  background: url(../images/close.png) no-repeat top right;
+  font-size: 14px;
+  line-height: 24px;
+  height: 24px;
+  color:#333;
+  text-transform:uppercase;
+  opacity: 0.7;
+  transition: all .4s ease;
+}
+
+.ccbOverlay .ccbOverlayContent .closeButton:hover {
+  opacity: 1;
+}
+
+.ccbOverlay .ccbOverlayContent h3 {
+  margin-top: 0;
+  margin-right: 150px;
+}
+
+.ccbOverlay .ccbOverlayContent h4 {
+  margin-top: 30px;
+  text-transform:uppercase;
+  font-size: 16px;
+  margin-bottom:0;
+}
+
+.ccbOverlay .ccbOverlayContent p {
+  
+    margin-top:0;
+    color:#666;
+
+}
+
+
+
 

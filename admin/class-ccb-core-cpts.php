@@ -58,33 +58,33 @@ class CCB_Core_CPTs extends CCB_Core_Plugin {
 
 		$settings = get_option( $this->plugin_settings_name );
 
-		if ( isset( $settings['groups-enabled'] ) && $settings['groups-enabled'] == 1 ) {
+		
 
 			$this->groups_cpt_options['name'] = ( empty( $settings['groups-name'] ) ? 'Groups' : $settings['groups-name'] );
 			$this->groups_cpt_options['slug'] = ( empty( $settings['groups-slug'] ) ? 'groups' : $settings['groups-slug'] );
 			$this->groups_cpt_options['singular_name'] = rtrim( $this->groups_cpt_options['name'], 's' ); // this is ghetto
-			$this->groups_cpt_options['exclude_from_search'] = ( $settings['groups-exclude-from-search'] == 'yes' ? true : false );
-			$this->groups_cpt_options['publicly_queryable'] = ( $settings['groups-publicly-queryable'] == 'yes' ? true : false );
-			$this->groups_cpt_options['show_ui'] = ( $settings['groups-show-ui'] == 'no' ? true : false );
-			$this->groups_cpt_options['show_in_nav_menus'] = ( $settings['groups-show-in-nav-menus'] == 'yes' ? true : false );
+			$this->groups_cpt_options['exclude_from_search'] = true;
+			$this->groups_cpt_options['publicly_queryable'] = true;
+			$this->groups_cpt_options['show_ui'] = true;
+			$this->groups_cpt_options['show_in_nav_menus'] = false;
 
 			$this->register_groups();
 
-		}
+		
 
-		if ( isset( $settings['calendar-enabled'] ) && $settings['calendar-enabled'] == 1 ) {
+		
 
 			$this->calendar_cpt_options['name'] = ( empty( $settings['calendar-name'] ) ? 'Events' : $settings['calendar-name'] );
 			$this->calendar_cpt_options['slug'] = ( empty( $settings['calendar-slug'] ) ? 'events' : $settings['calendar-slug'] );
 			$this->calendar_cpt_options['singular_name'] = rtrim( $this->calendar_cpt_options['name'], 's' ); // this is ghetto
-			$this->calendar_cpt_options['exclude_from_search'] = ( $settings['calendar-exclude-from-search'] == 'yes' ? true : false );
-			$this->calendar_cpt_options['publicly_queryable'] = ( $settings['calendar-publicly-queryable'] == 'yes' ? true : false );
-			$this->calendar_cpt_options['show_ui'] = ( $settings['calendar-show-ui'] == 'no' ? true : false );
-			$this->calendar_cpt_options['show_in_nav_menus'] = ( $settings['calendar-show-in-nav-menus'] == 'no' ? true : false );
+			$this->calendar_cpt_options['exclude_from_search'] = true;
+			$this->calendar_cpt_options['publicly_queryable'] = true;
+			$this->calendar_cpt_options['show_ui'] = true;
+			$this->calendar_cpt_options['show_in_nav_menus'] = false;
 
 			$this->register_calendar();
 
-		}
+		
 	}
 
 	/**
@@ -115,9 +115,9 @@ class CCB_Core_CPTs extends CCB_Core_Plugin {
 				),
 				'description' => __( 'These are the groups that are synchronized with your Church Community Builder software.', $this->plugin_name ),
 				'public' => true,
-				'publicly_queryable' => $this->groups_cpt_options['publicly_queryable'],
+				'publicly_queryable' => true,
 				'exclude_from_search' => $this->groups_cpt_options['exclude_from_search'],
-				'show_ui' => $this->groups_cpt_options['show_ui'],
+				'show_ui' => false,
 				'show_in_nav_menus' => $this->groups_cpt_options['show_in_nav_menus'],
 				'query_var' => true,
 				'menu_position' => 8,
@@ -151,7 +151,7 @@ class CCB_Core_CPTs extends CCB_Core_Plugin {
 				'query_var' => true,
 			);
 
-			register_taxonomy( $taxonomy_name, "{$this->plugin_name}-groups", $taxonomy_options );
+			register_taxonomy( $taxonomy_name, "ccb-content-groups", $taxonomy_options );
 		}
 
 	}
@@ -186,7 +186,7 @@ class CCB_Core_CPTs extends CCB_Core_Plugin {
 				'public' => true,
 				'publicly_queryable' => $this->calendar_cpt_options['publicly_queryable'],
 				'exclude_from_search' => $this->calendar_cpt_options['exclude_from_search'],
-				'show_ui' => $this->calendar_cpt_options['show_ui'],
+				'show_ui' => false,
 				'show_in_nav_menus' => $this->calendar_cpt_options['show_in_nav_menus'],
 				'query_var' => true,
 				'menu_position' => 8,
@@ -220,7 +220,7 @@ class CCB_Core_CPTs extends CCB_Core_Plugin {
 				'query_var' => true,
 			);
 
-			register_taxonomy( $taxonomy_name, "{$this->plugin_name}-calendar", $taxonomy_options );
+			register_taxonomy( $taxonomy_name, "ccb-content-calendar", $taxonomy_options );
 		}
 
 	}
@@ -309,6 +309,22 @@ class CCB_Core_CPTs extends CCB_Core_Plugin {
 			'calendar_duration' => array(
 				'api_mapping' => 'event_duration',
 				'data_type' => 'int',
+			),
+			'calendar_location' => array(
+				'api_mapping' => 'location',
+				'data_type' => 'string',
+			),
+			'calendar_leader' => array(
+				'api_mapping' => 'leader_name',
+				'data_type' => 'string',
+			),
+			'calendar_leader_phone' => array(
+				'api_mapping' => 'leader_phone',
+				'data_type' => 'string',
+			),
+			'calendar_leader_email' => array(
+				'api_mapping' => 'leader_email',
+				'data_type' => 'string',
 			),
 		);
 	}

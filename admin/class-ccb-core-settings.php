@@ -159,16 +159,16 @@ class CCB_Core_Settings extends CCB_Core_Plugin {
 	 */
 	public function get_settings_definitions() {
 		return array(
-			$this->plugin_settings_name => array(
+			$this->plugin_settings_name . '_ccb_about' => array(
 				'page_title' => 'About',
 				'sections' => array(
 					'about' => array(
 						'section_title' => 'About',
-						// no fields needed for the about page
+						// no fields needed for the about page 
 					),
 				),
 			),
-			$this->plugin_settings_name . '_api_settings' => array(
+			$this->plugin_settings_name . '_ccb_api' => array(
 				'page_title' => 'API Settings',
 				'sections' => array(
 					'api_settings' => array(
@@ -195,17 +195,12 @@ class CCB_Core_Settings extends CCB_Core_Plugin {
 					),
 				),
 			),
-			$this->plugin_settings_name . '_groups' => array(
+			$this->plugin_settings_name . '_ccb_groups' => array(
 				'page_title' => 'Groups',
 				'sections' => array(
 					'groups' => array(
-						'section_title' => 'Groups',
+						'section_title' => 'Groups Settings',
 						'fields' => array(
-							'groups-enabled' => array(
-								'field_title' => 'Enable Groups',
-								'field_render_function' => 'render_switch',
-								'field_validation' => 'switch',
-							),
 							'groups-name' => array(
 								'field_title' => 'Groups Display Name',
 								'field_render_function' => 'render_text',
@@ -214,91 +209,16 @@ class CCB_Core_Settings extends CCB_Core_Plugin {
 								'field_attributes' => array( 'data-requires' => '{"groups-enabled":1}' ),
 								'field_tooltip' => 'This is what you call the groups in your church (i.e. <em>Home Groups, Connections, Life Groups, etc.</em>).',
 							),
-							'groups-slug' => array(
-								'field_title' => 'Groups URL Name',
-								'field_render_function' => 'render_text',
-								'field_placeholder' => 'groups',
-								'field_validation' => 'slug',
-								'field_attributes' => array( 'data-requires' => '{"groups-enabled":1}' ),
-								'field_tooltip' => 'This is typically where your theme will display <em>all</em> the groups. WordPress calls this a "slug".',
-							),
-							'groups-import-images' => array(
-								'field_title' => 'Also Import Group Images?',
-								'field_render_function' => 'render_radio',
-								'field_options' => array(
-									'yes' => 'Yes',
-									'no' => 'No'
-								),
-								'field_validation' => '',
-								'field_default' => 'no',
-								'field_attributes' => array( 'data-requires' => '{"groups-enabled":1}' ),
-								'field_tooltip' => "This will download the CCB Group Image and attach it as a Featured Image.<br>If you don't need group images, then disabling this feature will speed up the synchronization.",
-							),
-							'groups-advanced' => array(
-								'field_title' => 'Enable Advanced Settings <em>(Optional)</em>',
-								'field_render_function' => 'render_switch',
-								'field_validation' => 'switch',
-								'field_attributes' => array( 'data-requires' => '{"groups-enabled":1}' ),
-							),
-							'groups-exclude-from-search' => array(
-								'field_title' => 'Exclude From Search?',
-								'field_render_function' => 'render_radio',
-								'field_options' => array(
-									'yes' => 'Yes',
-									'no' => 'No'
-								),
-								'field_validation' => '',
-								'field_default' => 'no',
-								'field_attributes' => array( 'data-requires' => '{"groups-enabled":1,"groups-advanced":1}' ),
-							),
-							'groups-publicly-queryable' => array(
-								'field_title' => 'Publicly Queryable?',
-								'field_render_function' => 'render_radio',
-								'field_options' => array(
-									'yes' => 'Yes',
-									'no' => 'No'
-								),
-								'field_validation' => '',
-								'field_default' => 'yes',
-								'field_attributes' => array( 'data-requires' => '{"groups-enabled":1,"groups-advanced":1}' ),
-							),
-							'groups-show-ui' => array(
-								'field_title' => 'Show In Admin UI?',
-								'field_render_function' => 'render_radio',
-								'field_options' => array(
-									'yes' => 'Yes',
-									'no' => 'No'
-								),
-								'field_validation' => '',
-								'field_default' => 'yes',
-								'field_attributes' => array( 'data-requires' => '{"groups-enabled":1,"groups-advanced":1}' ),
-							),
-							'groups-show-in-nav-menus' => array(
-								'field_title' => 'Show In Navigation Menus?',
-								'field_render_function' => 'render_radio',
-								'field_options' => array(
-									'yes' => 'Yes',
-									'no' => 'No'
-								),
-								'field_validation' => '',
-								'field_default' => 'no',
-								'field_attributes' => array( 'data-requires' => '{"groups-enabled":1,"groups-advanced":1}' ),
-							),
 						),
 					),
 				),
 			),
-			$this->plugin_settings_name . '_calendar' => array(
+			$this->plugin_settings_name . '_ccb_calendar' => array(
 				'page_title' => 'Public Events',
 				'sections' => array(
 					'calendar' => array(
-						'section_title' => 'Public Events',
+						'section_title' => 'Public Events Settings',
 						'fields' => array(
-							'calendar-enabled' => array(
-								'field_title' => 'Enable Events',
-								'field_render_function' => 'render_switch',
-								'field_validation' => 'switch',
-							),
 							'calendar-name' => array(
 								'field_title' => 'Event Display Name',
 								'field_render_function' => 'render_text',
@@ -307,20 +227,7 @@ class CCB_Core_Settings extends CCB_Core_Plugin {
 								'field_attributes' => array( 'data-requires' => '{"calendar-enabled":1}' ),
 								'field_tooltip' => 'This is what you call the events in your church (i.e. <em>Meetups, Hangouts, etc.</em>).',
 							),
-							'calendar-slug' => array(
-								'field_title' => 'Events URL Name',
-								'field_render_function' => 'render_text',
-								'field_placeholder' => 'events',
-								'field_validation' => 'slug',
-								'field_attributes' => array( 'data-requires' => '{"calendar-enabled":1}' ),
-								'field_tooltip' => 'This is typically where your theme will display <em>all</em> the events. WordPress calls this a "slug".',
-							),
-							'calendar-advanced' => array(
-								'field_title' => 'Enable Advanced Settings <em>(Optional)</em>',
-								'field_render_function' => 'render_switch',
-								'field_validation' => 'switch',
-								'field_attributes' => array( 'data-requires' => '{"calendar-enabled":1}' ),
-							),
+							
 							'calendar-date-range-type' => array(
 								'field_title' => 'Date Range Type',
 								'field_render_function' => 'render_radio',
@@ -373,55 +280,12 @@ class CCB_Core_Settings extends CCB_Core_Plugin {
 								'field_attributes' => array( 'data-requires' => '{"calendar-enabled":1,"calendar-advanced":1,"calendar-date-range-type":"specific"}' ),
 								'field_tooltip' => 'When synchronizing, we should get events that start <strong>before</strong> this date.<br><em>(Setting this too far into the future may cause the API to timeout)</em>',
 							),
-							'calendar-exclude-from-search' => array(
-								'field_title' => 'Exclude From Search?',
-								'field_render_function' => 'render_radio',
-								'field_options' => array(
-									'yes' => 'Yes',
-									'no' => 'No'
-								),
-								'field_validation' => '',
-								'field_default' => 'no',
-								'field_attributes' => array( 'data-requires' => '{"calendar-enabled":1,"calendar-advanced":1}' ),
-							),
-							'calendar-publicly-queryable' => array(
-								'field_title' => 'Publicly Queryable?',
-								'field_render_function' => 'render_radio',
-								'field_options' => array(
-									'yes' => 'Yes',
-									'no' => 'No'
-								),
-								'field_validation' => '',
-								'field_default' => 'yes',
-								'field_attributes' => array( 'data-requires' => '{"calendar-enabled":1,"calendar-advanced":1}' ),
-							),
-							'calendar-show-ui' => array(
-								'field_title' => 'Show In Admin UI?',
-								'field_render_function' => 'render_radio',
-								'field_options' => array(
-									'yes' => 'Yes',
-									'no' => 'No'
-								),
-								'field_validation' => '',
-								'field_default' => 'yes',
-								'field_attributes' => array( 'data-requires' => '{"calendar-enabled":1,"calendar-advanced":1}' ),
-							),
-							'calendar-show-in-nav-menus' => array(
-								'field_title' => 'Show In Navigation Menus?',
-								'field_render_function' => 'render_radio',
-								'field_options' => array(
-									'yes' => 'Yes',
-									'no' => 'No'
-								),
-								'field_validation' => '',
-								'field_default' => 'no',
-								'field_attributes' => array( 'data-requires' => '{"calendar-enabled":1,"calendar-advanced":1}' ),
-							),
+					
 						),
 					),
 				),
 			),
-			$this->plugin_settings_name . '_sync' => array(
+			$this->plugin_settings_name . '_ccb_sync' => array(
 				'page_title' => 'Synchronize',
 				'sections' => array(
 					'synchronize' => array(
