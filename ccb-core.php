@@ -23,5 +23,3 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-
-

@@ -53,7 +53,7 @@ class CCB_Core_Settings_Section extends CCB_Core_Plugin {
 	}
 
 	/**
-	 * Render the About page content
+	 * Render the About page content 
 	 *
 	 * This unfortunately also renders a fake hidden credentials section that can
 	 * be removed when Google decides to let Chrome behave.

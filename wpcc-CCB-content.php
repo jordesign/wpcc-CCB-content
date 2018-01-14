@@ -24,6 +24,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+define( 'wpccb_PLUGIN_PATH', dirname(__FILE__) );
+
 /******* Add 'CCB Card' as an option  in the 'Card Type' field ******/
 function wpcc_load_ccb_cards( $field ) {
              
@@ -46,6 +48,16 @@ register_activation_hook( __FILE__, array( 'CCB_Core_Activator', 'activate' ) );
 // internationalization, dashboard-specific hooks, and public-facing site hooks.
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-ccb-core.php';
 
+// Settings in the Customizer
+require_once plugin_dir_path( __FILE__ ) . 'customizer.php';
+
+// ACF Fields
+require_once plugin_dir_path( __FILE__ ) . 'fields.php';
+
+//Load Filters for the new cards
+// ACF Fields
+require_once plugin_dir_path( __FILE__ ) . 'cards/ccb_event_list.php';
+
 /**
  * Begin execution of the plugin.
  *
@@ -59,3 +71,12 @@ function run_ccb_core() {
 
 }
 run_ccb_core();
+
+//load stylesheet for CCB Cards
+function wpccb_load_stylesheet() {
+    // only enqueue on product-services page slug
+    if ( get_post_type() == 'card' ) {
+        wp_enqueue_style( 'wpccb-style', plugins_url( 'ccb_styles.css', __FILE__  ) );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'wpccb_load_stylesheet' );

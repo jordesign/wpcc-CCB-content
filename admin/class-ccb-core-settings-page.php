@@ -144,7 +144,7 @@ class CCB_Core_Settings_Page extends CCB_Core_Plugin {
 					                		<?php $groupID = get_post_meta(get_the_id(), 'group_id');
 					                		 ?>
 
-										<td class="editButton alignright">
+										<td class="editButton  alignright">
 											<a href="#" class="button previewButton">View Group Details</a>
 					                			<a href="<?php echo 'http://' . $this->subdomain . '.ccbchurch.com/group_detail.php?group_id=' . $groupID[0]; ?>"class="button" target="_blank">Edit in CCB</a>
 
@@ -328,7 +328,7 @@ class CCB_Core_Settings_Page extends CCB_Core_Plugin {
     								'meta_key' => 'calendar_date', 
 							    'order' => 'ASC',
 
-				                ) ); ?>
+				                ) ); ?> 
 
 					<table class="wp-list-table widefat fixed striped posts" style="margin-bottom: 40px;">
 					                	<thead>
@@ -356,6 +356,7 @@ class CCB_Core_Settings_Page extends CCB_Core_Plugin {
 											<?php if ($event_date = get_post_meta(get_the_ID(), 'calendar_date', true)){
 							                						echo $event_date;
 							                				} ?>
+							                				
 					                		</td>
 
 					                		<td>

@@ -302,6 +302,9 @@ class CCB_Core_Admin extends CCB_Core_Plugin {
 			wp_enqueue_style( 'picker-date', plugin_dir_url( __FILE__ ) . 'css/vendor/default.date.css', array(), $this->version, 'all' );
 			wp_enqueue_style( 'tipr', plugin_dir_url( __FILE__ ) . 'css/vendor/tipr.css', array(), $this->version, 'all' );
 		}
+		if(is_admin()){
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ccb-core-admin.css', array(), $this->version, 'all' );
+		}
 
 	}
 

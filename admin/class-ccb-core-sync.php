@@ -728,6 +728,9 @@ class CCB_Core_Sync extends CCB_Core_Plugin {
 					//Add Custom Field for Group ID
 					add_post_meta( $post_id, 'event_image_url', print_r( $event ) );
 
+					//Add Custom Field for Group ID
+					add_post_meta( $post_id, 'calendar_date_val', strtotime($event->date) );
+
 				// insert custom fields
 				$custom_fields_atts = $this->get_custom_fields_atts( $event, $calendar_custom_fields_map );
 				if ( ! empty( $custom_fields_atts ) ) {
