@@ -24,7 +24,7 @@
 
         //Check for filtering of query
         $groupingType = get_post_meta(get_the_ID(), 'ccb_upcoming_events_card_ccb_upcoming_events_group_type');
-        print_r($groupingType);
+        //print_r($groupingType);
             if ( $groupingType[0] == '' ){
                 $groupingType = 'all';
             }
@@ -93,19 +93,20 @@
                         
                         if ($eventTime = get_post_meta(get_the_ID(), 'calendar_start_time', true) ){
 
-                            $card_content .= '<span class="eventMetaTime"><i class="fa fa-clock-o"></i> ' . date("g:i a", strtotime("$eventTime")) . '</span>';
+                            $card_content .= '<span class="eventMetaTime"><i class="fa fa-clock-o"></i>&nbsp;' . date("g:i a", strtotime("$eventTime")) . '</span>';
 
                         }
 
                         if ($eventMetaLocation = get_post_meta(get_the_ID(), 'calendar_location', true) ){
 
-                            $card_content .= '<span class="eventLocation"><i class="fa fa-map-marker"></i> ' . $eventMetaLocation . '</span>';
+                            $card_content .= '<span class="eventLocation"><i class="fa fa-map-marker"></i>&nbsp;' . $eventMetaLocation . '</span>';
 
                         }
 
                         if (!empty($extraInformation) ){
-                            $card_content .= '<a class="eventMore" href="#"><i class="fa fa-chevron-circle-down"></i> More Information</a>';
+                            $card_content .= '<a class="eventMore" href="#"><i class="fa fa-chevron-circle-down"></i>&nbsp;More Information</a>';
                         }
+                    $card_content .= '</p>';
 
                         if (!empty($extraInformation) ){
                             $card_content .= '<div class="eventExtraInfo">';
@@ -146,7 +147,7 @@
 
                             if ($leader = get_post_meta(get_the_ID(), 'calendar_leader', true) ){
                                 if(in_array('leader_name', $extraInformation )){
-                                $card_content .= '<h4>Leader</h4><p><strong>' . $leader . '</strong></p>';
+                                $card_content .= '<h5>Leader</h5><p><strong>' . $leader . '</strong></p>';
 
                                 if (in_array('leader_contact', $extraInformation )){
 
@@ -165,7 +166,7 @@
 
                     $card_content .= '</p>';
 
-                $card_content .= '</div>';
+                $card_content .= '</div></div>';
 
                 if( in_array('view_link', $extraInformation ) ){
                     $eventID = get_post_meta(get_the_id(), 'event_id');

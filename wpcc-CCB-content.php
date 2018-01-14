@@ -77,6 +77,30 @@ function wpccb_load_stylesheet() {
     // only enqueue on product-services page slug
     if ( get_post_type() == 'card' ) {
         wp_enqueue_style( 'wpccb-style', plugins_url( 'ccb_styles.css', __FILE__  ) );
+        wp_enqueue_script( 'wpcc-scripts', plugins_url( 'ccb_script-min.js', __FILE__ ), array( 'jquery' ) );
     }
 }
 add_action( 'wp_enqueue_scripts', 'wpccb_load_stylesheet' );
+
+//Adding CSS inline style to an existing CSS stylesheet
+function wpccb_add_inline_css() {
+
+        //Get the Card's Colour Variable
+    $cardColour = get_post_meta(get_the_ID(),'wpcc_color',true );
+        //All the user input CSS settings as set in the plugin settings
+        $wpccb_custom_css = "
+            .wpccEventDate.dateCard .eventMonth,
+            .cardInfo .wpccUpcomingEvent a.button {
+                background: $cardColour;
+            }
+            .wpccEventDate.dateCard .eventDay {
+                color: $cardColour;
+            }
+            .wpccEventTitle p i {
+                 color: $cardColour;
+            }
+        ";
+  //Add the above custom CSS via wp_add_inline_style
+  wp_add_inline_style( 'wpccb-style', $wpccb_custom_css ); //Pass the variable into the main style sheet ID
+}
+add_action( 'wp_enqueue_scripts', 'wpccb_add_inline_css' ); //Enqueue the CSS style
