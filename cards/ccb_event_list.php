@@ -25,12 +25,13 @@
         //Check for filtering of query
         $groupingType = get_post_meta(get_the_ID(), 'ccb_upcoming_events_card_ccb_upcoming_events_group_type');
         print_r($groupingType);
-            if ( $groupingType[0]== '' ){
+            if ( $groupingType[0] == '' ){
                 $groupingType = 'all';
             }
+
         $eventType = get_post_meta(get_the_ID(), 'ccb_upcoming_events_card_ccb_upcoming_events_event_type');
-            if ( $eventType[0]== '' ){
-                $groupingType = 'all';
+            if ( $eventType[0] == '' ){
+                $eventType = 'all';
             }
 
         //Set up Query args
@@ -46,7 +47,14 @@
                 array(
                     'taxonomy' => 'calendar_grouping_name',
                     'field'    => 'term_id',
-                    'terms'    => $groupingType,
+                    'terms'    => $groupingType[0],
+                    
+                ),
+
+                array(
+                    'taxonomy' => 'calendar_event_type',
+                    'field'    => 'term_id',
+                    'terms'    => $eventType[0],
                     
                 ),
             ),
