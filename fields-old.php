@@ -258,7 +258,7 @@ acf_add_local_field( array (
           'wrapper' => array (
             'width' => '',
             'class' => '',
-            'id' => '',
+            'id' => '', 
           ),
           'message' => 'This card will automatically show the <em>next</em> CCB event that is going to occur',
           'new_lines' => 'wpautop',

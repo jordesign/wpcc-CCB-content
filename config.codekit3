@@ -203,6 +203,13 @@
 		"oAP": "\/cards\/ccb_event_list.php",
 		"oF": 0
 		},
+	"\/cards\/ccb_next_event.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/cards\/ccb_next_event.php",
+		"oF": 0
+		},
 	"\/ccb-core.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -229,6 +236,16 @@
 		"oF": 0,
 		"sC": 1,
 		"tS": 0
+		},
+	"\/ccb_styles-min.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/ccb_styles-min-min.css",
+		"oF": 0,
+		"oS": 3
 		},
 	"\/ccb_styles.css": {
 		"aP": 1,

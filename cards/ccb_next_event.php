@@ -1,63 +1,21 @@
 <?php
 
-
-
   /******* Filter the card link to trigger the popup ******/
-  function wpccb_coming_events($card_content) {
-    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_event_list'){
+  function wpccb_next_event_card($card_content) {
+    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_next_event'){
 
-        $card_content .='<div class="wpccEventList">';
-
-        //Check how long we should show events for
-        $eventListDuration = get_post_meta(get_the_ID(), 'ccb_upcoming_events_card_ccb_upcoming_events_duration');
-
-        //Define the number of seconds in a day
-        $day = 86400;
-
-        $addDays = $eventListDuration[0] * $day;
-
-        //This is the date we should show up until
-        $futureDate = time() + $addDays;
+        $card_content ='<div class="wpccNextEvent">';
 
         //Set up which content to show
-        $extraInformation = get_field( 'ccb_upcoming_events_card_event_information_to_display');
-
-        //Check for filtering of query
-        $groupingType = get_post_meta(get_the_ID(), 'ccb_upcoming_events_card_ccb_upcoming_events_group_type');
-        //print_r($groupingType);
-            if ( $groupingType[0] == '' ){
-                $groupingType = 'all';
-            }
-
-        $eventType = get_post_meta(get_the_ID(), 'ccb_upcoming_events_card_ccb_upcoming_events_event_type');
-            if ( $eventType[0] == '' ){
-                $eventType = 'all';
-            }
+        $extraInformation = get_field( 'ccb_next_event_card_event_information_to_display');
 
         //Set up Query args
         $args = array (
             'post_type' => 'ccb-content-calendar', 
-            'posts_per_page' => -1 , 
+            'posts_per_page' => 1 , 
             'orderby' => 'meta_value',
             'meta_key' => 'calendar_date', 
             'order' => 'ASC',
-            'tax_query' => array(
-                
-                
-                array(
-                    'taxonomy' => 'calendar_grouping_name',
-                    'field'    => 'term_id',
-                    'terms'    => $groupingType[0],
-                    
-                ),
-
-                array(
-                    'taxonomy' => 'calendar_event_type',
-                    'field'    => 'term_id',
-                    'terms'    => $eventType[0],
-                    
-                ),
-            ),
         );
        
         $ctc_events_query = new WP_Query( $args );
@@ -65,15 +23,10 @@
 
         while ( $ctc_events_query->have_posts() ) : $ctc_events_query->the_post();
 
-            $event_date = get_post_meta(get_the_ID(), 'calendar_date', true);
-
-            //If this is beyond our future date - we stop
-            if ( $futureDate <  strtotime($event_date) ){
-                break;
-            }
-
             
-            $card_content .='<div class="wpccUpcomingEvent">';
+            $event_date = get_post_meta(get_the_ID(), 'calendar_date', true);
+            
+            $card_content .='<div class="wpccSingleEvent">';
 
                 //Event Date
                 $card_content .= '<div class="wpccEventDate dateCard">';
@@ -178,14 +131,44 @@
 
         endwhile;
 
+        //Close the 'wpccEventList DIV'
+        $card_content .= '</div>';
+       
+        return $card_content;
 
-
+    }else{
+        return $card_content;
     }
 
-    //Close the 'wpccEventList DIV'
-    $card_content .= '</div>';
-   
-    return $card_content;
+    
   }
 
-  add_filter('wpcc_card_content', 'wpccb_coming_events');
+  add_filter('wpcc_card_content', 'wpccb_next_event_card');
+
+
+  /****** Filter the card title ******/
+add_filter('wpcc_card_title', 'wpccb_next_event_title');
+function wpccb_next_event_title($card_title) {
+    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_next_event'){
+
+             return '';
+        
+    }else{
+        return $card_title;
+    }
+    
+}
+
+
+  /****** Filter the card subtitle ******/
+add_filter('wpcc_card_subtitle', 'wpccb_next_event_subtitle');
+function wpccb_next_event_subtitle($card_title) {
+    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_next_event'){
+
+             return '';
+        
+    }else{
+        return $card_title;
+    }
+    
+}

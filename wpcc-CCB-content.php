@@ -55,8 +55,11 @@ require_once plugin_dir_path( __FILE__ ) . 'customizer.php';
 require_once plugin_dir_path( __FILE__ ) . 'fields.php';
 
 //Load Filters for the new cards
-// ACF Fields
+// Coming Events
 require_once plugin_dir_path( __FILE__ ) . 'cards/ccb_event_list.php';
+
+// Next event
+require_once plugin_dir_path( __FILE__ ) . 'cards/ccb_next_event.php';
 
 /**
  * Begin execution of the plugin.
