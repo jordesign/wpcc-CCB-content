@@ -3,6 +3,13 @@
 	padding: 10px 0;
 }
 
+.single-card a.button {
+	padding: 5px 10px;
+	border-radius: 5px;
+	display:inline-block;
+	text-transform:uppercase;
+}
+
 .cardInfo .wpccUpcomingEvent {
 	margin-bottom: 20px;
 	padding-bottom: 20px;
@@ -51,7 +58,7 @@
 		margin-bottom: 20px;
 	}
 
-	.cardInfo .wpccEventTitle span {
+	.cardInfo .wpccEventTitle p span {
 		margin-right: 20px;
 		color: #444;
 		white-space:nowrap;
@@ -90,14 +97,35 @@
 		margin: 20px 0 0;
 	}
 
-	.cardInfo .wpccUpcomingEvent a.button {
+	.cardInfo .wpccUpcomingEvent a.button,
+	.single-card .eventExtraInfo a.button {
 		color:#fff;
 		background:#666;
 		transition: background ease .4s;
 	}
 
-	.cardInfo .wpccUpcomingEvent a.button:hover {
+	.cardInfo .wpccUpcomingEvent a.button:hover,
+	.single-card .eventExtraInfo a.button:hover {
 		background:#333;
+	}
+
+	.singleEventExtraInfo.eventExtraInfo {
+		display:block;
+		margin: 30px 0 10px 0;
+		
+	}
+
+	.single-card .wpccEventTitle h1,
+	.single-card .wpccEventTitle h4 {
+		clear:none;
+		line-height: 1.2;
+		position:relative;
+		top:-5px;
+		margin-left: 65px;
+	}
+
+	.single-card .cardInfo .wpccEventTitle p {
+		margin-bottom: 40px;
 	}
 
 @media only screen and (min-width: 760px) {

@@ -106,7 +106,7 @@
                         if (!empty($extraInformation) ){
                             $card_content .= '<a class="eventMore" href="#"><i class="fa fa-chevron-circle-down"></i>&nbsp;More Information</a>';
                         }
-                    $card_content .= '</p>';
+                    $card_content .= '</p></div>';
 
                         if (!empty($extraInformation) ){
                             $card_content .= '<div class="eventExtraInfo">';
@@ -166,7 +166,7 @@
 
                     $card_content .= '</p>';
 
-                $card_content .= '</div></div>';
+                $card_content .= '</div>';
 
                 if( in_array('view_link', $extraInformation ) ){
                     $eventID = get_post_meta(get_the_id(), 'event_id');
@@ -177,7 +177,7 @@
             $card_content .='</div>';
 
         endwhile;
-
+        wp_reset_query();
 
 
     }
