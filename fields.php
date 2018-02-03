@@ -24,7 +24,7 @@ acf_add_local_field( array (
     'ccb_event_list' => 'Upcoming Events',
     'ccb_single_event' => 'Specific Event',
     'ccb_next_event' => 'Next Event',
-    'ccb_group_list' => 'Group List',
+    //'ccb_group_list' => 'Group List',
   ),
   'default_value' => array (
   ),
@@ -229,6 +229,103 @@ acf_add_local_field( array (
         
     
         array (
+          'key' => 'event_information_to_display',
+          'label' => 'Event Information to Display',
+          '_name' => 'event_information_to_display',
+          'name' => 'event_information_to_display',
+          'type' => 'checkbox',
+          'value' => NULL,
+          'instructions' => '',
+          'required' => 0,
+          'conditional_logic' => 0,
+          'wrapper' => array (
+            'width' => '',
+            'class' => '',
+            'id' => '',
+          ),
+          'choices' => array (
+            'event_type' => 'Event Type',
+            'grouping_name' => 'Grouping Name',
+            'group_name' => 'Group Name',
+            'leader_name' => 'Leader Name',
+            'leader_contact' => 'Leader Contact Details',
+            'view_link' => '"View on CCB" Button',
+          ),
+          'allow_custom' => 0,
+          'save_custom' => 0,
+          'default_value' => array (
+          ),
+          'layout' => 'horizontal',
+          'toggle' => 0,
+          'return_format' => 'value',
+        ),
+        
+      ),
+) );
+
+//Next Event Card
+acf_add_local_field( array (
+      'key' => 'ccb_single_event_card',
+      'label' => 'Specific Event Card',
+      '_name' => 'ccb_single_event_card',
+      'name' => 'ccb_single_event_card',
+      'type' => 'group',
+      'value' => NULL,
+      'instructions' => '',
+      'required' => 0,
+      'parent' => 'acf_card-content',
+      'conditional_logic' => array (
+        array (
+          array (
+            'field' => 'field_59fa684896a83',
+            'operator' => '==',
+            'value' => 'ccb_single_event',
+          ),
+          array (
+            'field' => 'field_5994ca00ccd17',
+            'operator' => '==',
+            'value' => 'ccb',
+          ),
+        ),
+      ),
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'layout' => 'block',
+      'sub_fields' => array (
+
+        array(
+          'key' => 'field_5a7397b0a3682',
+          'label' => 'Select Event',
+          'name' => 'ccb_specific_event',
+          '_name' => 'ccb_specific_event',
+          'type' => 'relationship',
+          'instructions' => '',
+          'required' => 0,
+          'conditional_logic' => 0,
+          'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+          ),
+          'post_type' => array(
+            0 => 'ccb-content-calendar',
+          ),
+          'taxonomy' => array(
+          ),
+          'filters' => array(
+            0 => 'search',
+            1 => 'taxonomy',
+          ),
+          'elements' => '',
+          'min' => '1',
+          'max' => '1',
+          'return_format' => 'id',
+        ),
+    
+        array(
           'key' => 'event_information_to_display',
           'label' => 'Event Information to Display',
           '_name' => 'event_information_to_display',

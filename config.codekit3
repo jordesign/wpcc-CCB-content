@@ -210,6 +210,13 @@
 		"oAP": "\/cards\/ccb_next_event.php",
 		"oF": 0
 		},
+	"\/cards\/ccb_specific_event.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/cards\/ccb_specific_event.php",
+		"oF": 0
+		},
 	"\/ccb-core.php": {
 		"cB": 0,
 		"ft": 8192,

@@ -1,14 +1,17 @@
 <?php
 
   /******* Filter the card content ******/
-  function wpccb_next_event_card($card_content) {
-    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_next_event'){
+  function wpccb_specific_event_card($card_content) {
+    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_single_event'){
 
         $card_content ='<div class="wpccNextEvent">';
 
         //Set up which content to show
-        $extraInformation = get_field( 'ccb_next_event_card_event_information_to_display');
+        $extraInformation = get_field( 'ccb_single_event_card_event_information_to_display');
+        $specificEvent = get_field( 'ccb_single_event_card_ccb_specific_event');
+        $specificEventID = $specificEvent[0] -> ID;
         $cardColor = get_post_meta(get_the_ID(),'wpcc_color',true);
+
 
         //Set up Query args
         $args = array (
@@ -17,6 +20,7 @@
             'orderby' => 'meta_value',
             'meta_key' => 'calendar_date', 
             'order' => 'ASC',
+            'post__in' => array($specificEventID),
         );
        
         $ctc_events_query = new WP_Query( $args );
@@ -151,26 +155,13 @@
     
   }
 
-  add_filter('wpcc_card_content', 'wpccb_next_event_card');
+  add_filter('wpcc_card_content', 'wpccb_specific_event_card');
 
 
   /****** Filter the card title on single card ******/
-add_filter('wpcc_card_title', 'wpccb_next_event_title');
-function wpccb_next_event_title($card_title) {
-    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_next_event'){
-
-             return '';
-        
-    }else{
-        return $card_title;
-    }
-    
-}
-
-  /****** Filter the card title on single card ******/
-add_filter('wpcc_card_subtitle', 'wpccb_next_event_subtitle');
-function wpccb_next_event_subtitle($card_title) {
-    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_next_event'){
+add_filter('wpcc_card_title', 'wpccb_specific_event_title');
+function wpccb_specific_event_title($card_title) {
+    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_single_event'){
 
              return '';
         
@@ -182,10 +173,27 @@ function wpccb_next_event_subtitle($card_title) {
 
 
   /****** Filter the card subtitle on single card ******/
-add_filter('wpcc_archive_card_subtitle', 'wpccb_archive_next_event_subtitle');
-add_filter('wpcc_card_seo_description', 'wpccb_archive_next_event_subtitle');
-function wpccb_archive_next_event_subtitle($card_subtitle) {
-    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_next_event'){
+add_filter('wpcc_card_subtitle', 'wpccb_specific_event_subtitle');
+function wpccb_specific_event_subtitle($card_title) {
+    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_single_event'){
+
+             return '';
+        
+    }else{
+        return $card_title;
+    }
+    
+}
+
+
+  /****** Filter the card subtitle on archive view ******/
+add_filter('wpcc_archive_card_subtitle', 'wpccb_archive_specific_event_subtitle');
+add_filter('wpcc_card_seo_description', 'wpccb_archive_specific_event_subtitle');
+function wpccb_archive_specific_event_subtitle($card_subtitle) {
+    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_single_event'){
+
+        $specificEvent = get_field( 'ccb_single_event_card_ccb_specific_event');
+        $specificEventID = $specificEvent[0] -> ID;
 
              //Set up Query args
         $args = array (
@@ -194,6 +202,7 @@ function wpccb_archive_next_event_subtitle($card_subtitle) {
             'orderby' => 'meta_value',
             'meta_key' => 'calendar_date', 
             'order' => 'ASC',
+            'post__in' => array($specificEventID),
         );
        
         $ctc_events_query = new WP_Query( $args );
@@ -213,11 +222,14 @@ function wpccb_archive_next_event_subtitle($card_subtitle) {
 }
 
 
-/****** Filter the card title and subtitle on archive view ******/
-add_filter('wpcc_archive_card_title', 'wpccb_archive_next_event_title', 10, 1);
-add_filter('wpcc_card_seo_title', 'wpccb_archive_next_event_title', 10, 1);
-function wpccb_archive_next_event_title($card_title) {
-    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_next_event'){
+/****** Filter the card title on archive view ******/
+add_filter('wpcc_archive_card_title', 'wpccb_archive_specific_event_title', 10, 1);
+add_filter('wpcc_card_seo_title', 'wpccb_archive_specific_event_title', 10, 1);
+function wpccb_archive_specific_event_title($card_title) {
+    if( get_field('ccb_card_type', get_the_ID()) === 'ccb_single_event'){
+
+        $specificEvent = get_field( 'ccb_single_event_card_ccb_specific_event');
+        $specificEventID = $specificEvent[0] -> ID;
 
         //Set up Query args
         $args = array (
@@ -226,6 +238,7 @@ function wpccb_archive_next_event_title($card_title) {
             'orderby' => 'meta_value',
             'meta_key' => 'calendar_date', 
             'order' => 'ASC',
+            'post__in' => array($specificEventID),
         );
        
         $ctc_events_query = new WP_Query( $args );
