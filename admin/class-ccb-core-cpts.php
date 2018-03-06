@@ -186,7 +186,7 @@ class CCB_Core_CPTs extends CCB_Core_Plugin {
 				'public' => true,
 				'publicly_queryable' => $this->calendar_cpt_options['publicly_queryable'],
 				'exclude_from_search' => $this->calendar_cpt_options['exclude_from_search'],
-				'show_ui' => false,
+				'show_ui' => true,
 				'show_in_nav_menus' => $this->calendar_cpt_options['show_in_nav_menus'],
 				'query_var' => true,
 				'menu_position' => 8,

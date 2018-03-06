@@ -264,16 +264,18 @@ acf_add_local_field( array (
 ) );
 
 //Next Event Card
-acf_add_local_field( array (
-      'key' => 'ccb_single_event_card',
-      'label' => 'Specific Event Card',
-      '_name' => 'ccb_single_event_card',
-      'name' => 'ccb_single_event_card',
+acf_add_local_field_group(array(
+  'key' => 'group_5a8e0e48f222a',
+  'title' => 'test event select',
+  'fields' => array(
+    array(
+      'key' => 'field_5a8e0e568b5f5',
+      'label' => 'test',
+      'name' => 'test',
       'type' => 'group',
-      'value' => NULL,
+      'parent' => 'acf_card-content',
       'instructions' => '',
       'required' => 0,
-      'parent' => 'acf_card-content',
       'conditional_logic' => array (
         array (
           array (
@@ -288,19 +290,17 @@ acf_add_local_field( array (
           ),
         ),
       ),
-      'wrapper' => array (
+      'wrapper' => array(
         'width' => '',
         'class' => '',
         'id' => '',
       ),
       'layout' => 'block',
-      'sub_fields' => array (
-
+      'sub_fields' => array(
         array(
-          'key' => 'field_5a7397b0a3682',
+          'key' => 'field_5a8e0e648b5f6', 
           'label' => 'Select Event',
           'name' => 'ccb_specific_event',
-          '_name' => 'ccb_specific_event',
           'type' => 'relationship',
           'instructions' => '',
           'required' => 0,
@@ -317,14 +317,14 @@ acf_add_local_field( array (
           ),
           'filters' => array(
             0 => 'search',
-            1 => 'taxonomy',
+            1 => 'post_type',
+            2 => 'taxonomy',
           ),
           'elements' => '',
           'min' => '1',
           'max' => '1',
           'return_format' => 'id',
         ),
-    
         array(
           'key' => 'event_information_to_display',
           'label' => 'Event Information to Display',
@@ -356,8 +356,79 @@ acf_add_local_field( array (
           'toggle' => 0,
           'return_format' => 'value',
         ),
-        
+        array(
+          'key' => 'ccb_event_id',
+          'label' => 'CCB Event ID',
+          '_name' => 'ccb_event_id',
+          'name' => 'ccb_event_id',
+          'type' => 'text',
+          'value' => NULL,
+          'instructions' => '',
+          'required' => 0,
+          'conditional_logic' => 0,
+          'wrapper' => array (
+            'width' => '',
+            'class' => '',
+            'id' => '',
+          ),
+          
+          'allow_custom' => 0,
+          'save_custom' => 0,
+          'default_value' => '',
+        ),
       ),
-) );
+    ),
+  ),
+  'location' => array(
+    array(
+      array(
+        'param' => 'post_type',
+        'operator' => '==',
+        'value' => 'card',
+      ),
+    ),
+  ),
+  'menu_order' => 0,
+  'position' => 'normal',
+  'style' => 'default',
+  'label_placement' => 'top',
+  'instruction_placement' => 'label',
+  'hide_on_screen' => '',
+  'active' => 1,
+  'description' => '',
+));
+
+
 
 }
+
+// Autosave the Event ID into the field of the card
+
+function wpccb_save_eventID( $post_id, $post, $update ) {
+
+    global $post; 
+    if ($post->post_type != 'card'){
+        return;
+    }
+
+    if ($ccb_event_post_id = get_post_meta($post_id, 'test_ccb_specific_event', true) ){ //This returns an array containing the WordPress/CBB event post ID
+
+      $ccb_event_id = get_post_meta($ccb_event_post_id[0], 'event_id', true);
+      $ccb_event_title = get_the_title($ccb_event_post_id[0]);
+      $ccb_event_date = get_post_meta($ccb_event_post_id[0], 'calendar_date', true);
+
+      // - Update the post's metadata.
+      update_post_meta( $post_id, 'test_ccb_event_id', $ccb_event_id );
+      update_post_meta( $post_id, 'ccb_event_date', $ccb_event_date );
+      update_post_meta( $post_id, 'ccb_event_title', $ccb_event_title );
+      update_post_meta( $post_id, 'ccb_original_wp_post_id', $ccb_event_post_id[0] );
+
+    }
+
+    
+
+    
+
+
+}
+add_action( 'save_post', 'wpccb_save_eventID', 10, 3 );

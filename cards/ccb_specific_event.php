@@ -7,20 +7,21 @@
         $card_content ='<div class="wpccNextEvent">';
 
         //Set up which content to show
-        $extraInformation = get_field( 'ccb_single_event_card_event_information_to_display');
-        $specificEvent = get_field( 'ccb_single_event_card_ccb_specific_event');
-        $specificEventID = $specificEvent[0] -> ID;
+        $extraInformation = get_field( 'test_event_information_to_display');
+        $specificEvent = get_field( 'test_ccb_specific_event');
+        $specificEventID = $specificEvent[0];
         $cardColor = get_post_meta(get_the_ID(),'wpcc_color',true);
-
+        $ccbEventID = get_post_meta(get_the_ID(), 'test_ccb_event_id', true);
 
         //Set up Query args
         $args = array (
             'post_type' => 'ccb-content-calendar', 
             'posts_per_page' => 1 , 
             'orderby' => 'meta_value',
-            'meta_key' => 'calendar_date', 
+            'meta_key' => 'event_id',
+            'meta_value' => $ccbEventID, 
             'order' => 'ASC',
-            'post__in' => array($specificEventID),
+            
         );
        
         $ctc_events_query = new WP_Query( $args );
@@ -192,29 +193,9 @@ add_filter('wpcc_card_seo_description', 'wpccb_archive_specific_event_subtitle')
 function wpccb_archive_specific_event_subtitle($card_subtitle) {
     if( get_field('ccb_card_type', get_the_ID()) === 'ccb_single_event'){
 
-        $specificEvent = get_field( 'ccb_single_event_card_ccb_specific_event');
-        $specificEventID = $specificEvent[0] -> ID;
-
-             //Set up Query args
-        $args = array (
-            'post_type' => 'ccb-content-calendar', 
-            'posts_per_page' => 1 , 
-            'orderby' => 'meta_value',
-            'meta_key' => 'calendar_date', 
-            'order' => 'ASC',
-            'post__in' => array($specificEventID),
-        );
-       
-        $ctc_events_query = new WP_Query( $args );
-
-
-        while ( $ctc_events_query->have_posts() ) : $ctc_events_query->the_post();
-
-            $card_subtitle = date( get_option('date_format'), strtotime(get_post_meta(get_the_ID(), 'calendar_date', true) ) );
-
-        endwhile;
-        wp_reset_query();
-    
+        $specificEvent = get_field( 'test_ccb_specific_event');
+        $specificEventID = $specificEvent[0];
+        $card_subtitle = date( get_option('date_format'), strtotime(get_post_meta($specificEventID, 'calendar_date', true) ) );
     }
 
     return $card_subtitle;
@@ -228,28 +209,9 @@ add_filter('wpcc_card_seo_title', 'wpccb_archive_specific_event_title', 10, 1);
 function wpccb_archive_specific_event_title($card_title) {
     if( get_field('ccb_card_type', get_the_ID()) === 'ccb_single_event'){
 
-        $specificEvent = get_field( 'ccb_single_event_card_ccb_specific_event');
-        $specificEventID = $specificEvent[0] -> ID;
 
-        //Set up Query args
-        $args = array (
-            'post_type' => 'ccb-content-calendar', 
-            'posts_per_page' => 1 , 
-            'orderby' => 'meta_value',
-            'meta_key' => 'calendar_date', 
-            'order' => 'ASC',
-            'post__in' => array($specificEventID),
-        );
-       
-        $ctc_events_query = new WP_Query( $args );
+        $card_title = get_post_meta( get_the_ID(), 'ccb_event_title', true);
 
-
-        while ( $ctc_events_query->have_posts() ) : $ctc_events_query->the_post();
-
-            $card_title = get_the_title();
-
-        endwhile;
-        wp_reset_query();
     
     }
 

@@ -64,7 +64,6 @@ require_once plugin_dir_path( __FILE__ ) . 'cards/ccb_next_event.php';
 // Specific event
 require_once plugin_dir_path( __FILE__ ) . 'cards/ccb_specific_event.php';
 
-
 /**
  * Begin execution of the plugin.
  *
