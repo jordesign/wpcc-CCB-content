@@ -270,7 +270,7 @@ acf_add_local_field_group(array(
   'fields' => array(
     array(
       'key' => 'field_5a8e0e568b5f5',
-      'label' => 'test',
+      'label' => 'Specific Event Details',
       'name' => 'test',
       'type' => 'group',
       'parent' => 'acf_card-content',
@@ -356,26 +356,6 @@ acf_add_local_field_group(array(
           'toggle' => 0,
           'return_format' => 'value',
         ),
-        array(
-          'key' => 'ccb_event_id',
-          'label' => 'CCB Event ID',
-          '_name' => 'ccb_event_id',
-          'name' => 'ccb_event_id',
-          'type' => 'text',
-          'value' => NULL,
-          'instructions' => '',
-          'required' => 0,
-          'conditional_logic' => 0,
-          'wrapper' => array (
-            'width' => '',
-            'class' => '',
-            'id' => '',
-          ),
-          
-          'allow_custom' => 0,
-          'save_custom' => 0,
-          'default_value' => '',
-        ),
       ),
     ),
   ),
@@ -390,7 +370,7 @@ acf_add_local_field_group(array(
   ),
   'menu_order' => 0,
   'position' => 'normal',
-  'style' => 'default',
+  'style' => 'seamless',
   'label_placement' => 'top',
   'instruction_placement' => 'label',
   'hide_on_screen' => '',
@@ -418,7 +398,7 @@ function wpccb_save_eventID( $post_id, $post, $update ) {
       $ccb_event_date = get_post_meta($ccb_event_post_id[0], 'calendar_date', true);
 
       // - Update the post's metadata.
-      update_post_meta( $post_id, 'test_ccb_event_id', $ccb_event_id );
+      update_post_meta( $post_id, 'ccb_event_id', $ccb_event_id );
       update_post_meta( $post_id, 'ccb_event_date', $ccb_event_date );
       update_post_meta( $post_id, 'ccb_event_title', $ccb_event_title );
       update_post_meta( $post_id, 'ccb_original_wp_post_id', $ccb_event_post_id[0] );

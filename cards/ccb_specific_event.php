@@ -11,7 +11,7 @@
         $specificEvent = get_field( 'test_ccb_specific_event');
         $specificEventID = $specificEvent[0];
         $cardColor = get_post_meta(get_the_ID(),'wpcc_color',true);
-        $ccbEventID = get_post_meta(get_the_ID(), 'test_ccb_event_id', true);
+        $ccbEventID = get_post_meta(get_the_ID(), 'ccb_event_id', true);
 
         //Set up Query args
         $args = array (
@@ -193,9 +193,7 @@ add_filter('wpcc_card_seo_description', 'wpccb_archive_specific_event_subtitle')
 function wpccb_archive_specific_event_subtitle($card_subtitle) {
     if( get_field('ccb_card_type', get_the_ID()) === 'ccb_single_event'){
 
-        $specificEvent = get_field( 'test_ccb_specific_event');
-        $specificEventID = $specificEvent[0];
-        $card_subtitle = date( get_option('date_format'), strtotime(get_post_meta($specificEventID, 'calendar_date', true) ) );
+        $card_subtitle = date( get_option('date_format'), strtotime(get_post_meta(get_the_ID(), 'ccb_event_date', true) ) );
     }
 
     return $card_subtitle;
