@@ -405,10 +405,5 @@ function wpccb_save_eventID( $post_id, $post, $update ) {
 
     }
 
-    
-
-    
-
-
 }
 add_action( 'save_post', 'wpccb_save_eventID', 10, 3 );

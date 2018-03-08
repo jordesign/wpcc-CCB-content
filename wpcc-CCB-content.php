@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name:       WP Church Center: CCB Addon
  * Plugin URI:        http://www.wpchurch.center
- * Description:       An addon plugin for WP Church Center that provides integration with your CCB account
+ * Description:       An addon plugin for WP Church Center that provides integration with your Church Community Builder account
  * Version:           1.0
  * Author:            WP Church Team
  * Author URI:        http://wpchurch.team/
